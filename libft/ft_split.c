@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 17:46:52 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/27 10:39:24 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/01/13 15:46:46 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,13 @@ static char	*rmchar(char *s, char c, int a)
 	return (&s[j]);
 }
 
-void	*freefall(char **spl)
+void	*free_split(char **spl)
 {
 	int	i;
 
 	i = 0;
+	if (!spl)
+		return (NULL);
 	while (spl[i])
 	{
 		free(spl[i]);
@@ -94,7 +96,7 @@ char	**ft_split(char const *s, char c)
 	{
 		spl[m] = ft_substr (s, 0, cntlen(s, c));
 		if (!spl)
-			return (freefall(spl));
+			return (free_split(spl));
 		s = rmchar ((char *) s, c, 2);
 		m++;
 	}
