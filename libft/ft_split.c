@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 17:46:52 by alcaball          #+#    #+#             */
-/*   Updated: 2024/01/13 15:46:46 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:06:18 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ char	**ft_split(char const *s, char c)
 	char	**spl;
 
 	m = 0;
+	if (!s || ft_strlen(s) == 0)
+		return (NULL);
 	count = cntwrd (s, c);
 	spl = (char **) malloc ((count + 1) * sizeof(char *));
 	if (!spl)

@@ -11,7 +11,7 @@ FLAGS = -Wall -Wextra -Werror -O3
 LIB = libft/libft.a
 MLX = minilibx/libmlx.a
 
-SRC_PARS = parsing/open_map.c parsing/check_numbers.c parsing/init_scene.c parsing/parse_lines.c
+SRC_PARS = parsing/open_map.c parsing/check_numbers.c parsing/init_scene.c parsing/parse_lines.c parsing/init_objects.c
 SRC_MAIN = minirt.c error_mngr.c utils.c
 SRC = $(SRC_MAIN) $(SRC_PARS)
 

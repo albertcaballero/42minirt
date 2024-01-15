@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/01/15 12:31:17 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:52:50 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define FAN 0xa80874
 
 // ================================= STRUCTURES =============================
-
+/*  ===== VECTORS & UTILS ========== */
 typedef enum e_scenetypes
 {
 	AMBI = 1,
@@ -61,6 +61,31 @@ typedef struct s_color
 	int				hex;
 }	t_color;
 
+/* ==========  OBJECTS  ========== */
+typedef struct s_sphere
+{
+	double	diam;
+	t_vec	pos;
+	t_color	col;
+}	t_sp;
+
+typedef struct s_plane
+{
+	t_vec	pos;
+	t_vec	rot;
+	t_color	col;
+}	t_pl;
+
+typedef struct s_cylinder
+{
+	double	diam;
+	double	height;
+	t_vec	pos;
+	t_vec	rot;
+	t_color	col;
+}	t_cy;
+
+/*=============== IDENTIFIERS  ==========*/
 typedef struct s_ambientLight
 {
 	float		ratio;
@@ -80,9 +105,18 @@ typedef struct s_light
 	float	ratio;
 }	t_light;
 
-typedef union s_objects
+/*=============== SCENE ==========*/
+typedef union u_forms
 {
-	int	i;
+	t_sp	*sp;
+	t_cy	*cy;
+	t_pl	*pl;
+}	t_forms;
+
+typedef struct s_objects
+{
+	t_forms				form;
+	struct s_objects	*next;
 }	t_objs;
 
 typedef struct s_scene
@@ -90,7 +124,7 @@ typedef struct s_scene
 	t_ambient	ambient;
 	t_camera	cam;
 	t_light		light;
-	t_objs		objs;
+	t_objs		*objs;
 }	t_scene;
 
 // =================================== FUNCTIONS =============================
@@ -100,6 +134,7 @@ int		error_msg(char *msg);
 
 /* utils.c */
 double	ft_atod(char *str);
+t_objs	*ft_listlast_obj(t_objs *lst);
 
 /*========== PARSING ==========*/
 /* open_map.c */
@@ -110,9 +145,16 @@ int		check_identifiers(char *str);
 
 /* INIT_SCENE.C */
 void	init_type(t_scene *scene, char **args, int type);
+void			print_scene(t_scene *scene);
+t_vec	parse_vector(char *line);
+t_color	parse_color(char *line);
 
 /* check_numbers.c */
 int		checkrng_int(char *str, int min, int max);
 int		checkrng_double(char *str, double min, double max);
+
+/* init_objects.c */
+void	add_objects(t_objs *objs, char **args, int type);
+void	init_type_obj(t_objs *obj, char **args, int type);
 
 #endif

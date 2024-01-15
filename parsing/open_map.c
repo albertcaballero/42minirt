@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:29:44 by alcaball          #+#    #+#             */
-/*   Updated: 2024/01/15 13:22:06 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:07:14 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,19 @@ int	open_map(char *fname, t_scene *scene)
 		error_msg("Empty file");
 	while (line)
 	{
-		if (line[0] == '#')
+		line = ft_strtrim(line, "\n\t ");
+		if (line && ft_strlen(line) != 0)
 		{
-			free(line);
-			line = get_next_line(fd);
-			continue ;
+			split = ft_split(line, ' ');
+			type = check_identifiers(split[0]);
+			if (type != '#')
+				init_type(scene, split, type);
+			free_split(split);
 		}
-		split = ft_split(line, ' ');
-		type = check_identifiers(split[0]);
-		init_type(scene, split, type);
-		free_split(split);
 		free(line);
 		line = get_next_line(fd);
 	}
+	print_scene(scene);
+	close (fd);
 	return (0);
 }
