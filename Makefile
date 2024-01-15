@@ -7,13 +7,13 @@ PINK    =   \033[38;5;219m
 NC      =   \033[0m
 
 NAME = minirt
-FLAGS = -Wall -Wextra -Werror -03
+FLAGS = -Wall -Wextra -Werror -O3
 LIB = libft/libft.a
 MLX = minilibx/libmlx.a
 
-SRC_PARS = parsing/open_map.c
-SRC_MAIN = minirt.c error_mngr.c
-SRC = $(SRC_MAIN) $(SRC_MAIN)
+SRC_PARS = parsing/open_map.c parsing/check_numbers.c parsing/init_scene.c parsing/parse_lines.c
+SRC_MAIN = minirt.c error_mngr.c utils.c
+SRC = $(SRC_MAIN) $(SRC_PARS)
 
 OBJS = $(addprefix temp/,$(SRC:.c=.o))
 
@@ -24,7 +24,8 @@ $(NAME): $(OBJS) $(LIB) $(MLX)
 	@echo "$(PURPLE)=====MINIRT COMPILED=====$(NC)"
 
 temp/%.o: %.c minirt.h $(LIB) $(MLX) Makefile
-	cc -c -o $@ $<
+	@mkdir -p $(dir $@)
+	cc $(FLAGS) -c -o $@ $<
 
 tmp:
 	mkdir -p temp

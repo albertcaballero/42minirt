@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/01/13 19:08:41 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:31:17 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,16 @@
 
 // ================================= STRUCTURES =============================
 
-typedef enum e_scene
+typedef enum e_scenetypes
 {
 	AMBI = 1,
 	CAM = 2,
 	LIGHT = 3,
 	SP = 4,
 	CY = 5,
-	PL = 6
-}	e_types;
+	PL = 6,
+	CN = 7
+}	t_stypes;
 
 typedef struct s_vector
 {
@@ -52,10 +53,18 @@ typedef struct s_vector
 	double	z;
 }	t_vec;
 
+typedef struct s_color
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	int				hex;
+}	t_color;
+
 typedef struct s_ambientLight
 {
 	float		ratio;
-	t_vec		color;
+	t_color		color;
 }	t_ambient;
 
 typedef struct s_camera
@@ -71,23 +80,39 @@ typedef struct s_light
 	float	ratio;
 }	t_light;
 
+typedef union s_objects
+{
+	int	i;
+}	t_objs;
+
 typedef struct s_scene
 {
 	t_ambient	ambient;
 	t_camera	cam;
 	t_light		light;
+	t_objs		objs;
 }	t_scene;
 
 // =================================== FUNCTIONS =============================
 /*========== MAIN =============*/
 /* ERROR_MNGR.C */
-int	error_msg(char *msg);
+int		error_msg(char *msg);
+
+/* utils.c */
+double	ft_atod(char *str);
 
 /*========== PARSING ==========*/
 /* open_map.c */
-int	open_map(char *fname, t_scene *scene);
+int		open_map(char *fname, t_scene *scene);
 
 /* parse_lines.c */
-int	check_identifiers(char *str);
+int		check_identifiers(char *str);
+
+/* INIT_SCENE.C */
+void	init_type(t_scene *scene, char **args, int type);
+
+/* check_numbers.c */
+int		checkrng_int(char *str, int min, int max);
+int		checkrng_double(char *str, double min, double max);
 
 #endif

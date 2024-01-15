@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:12:37 by alcaball          #+#    #+#             */
-/*   Updated: 2024/01/13 15:47:14 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:58:45 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <strings.h>
 # include <stdlib.h>
 # include <unistd.h>
+#include "gnl/get_next_line.h"
 
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 int			ft_isalnum(int c);
@@ -50,6 +51,7 @@ char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s1, char const *set);
 char		**ft_split(char const *s, char c);
 void		*free_split(char **spl);
+int			ft_splitlen(char **spl);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void		ft_striteri(char *s, void (*f)(unsigned int, char*));
 void		ft_putstr_fd(char *s, int fd);
@@ -75,8 +77,5 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 /* GNL */
 char	*get_next_line(int fd);
-char	*ft_strjoin_gnl(char *s1, char *s2);
-char	*ft_substr_gnl(char *s, unsigned int start, size_t len);
-char	*freeall(char *s1, char *s2);
 
 #endif
