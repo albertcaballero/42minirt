@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/01/15 18:52:50 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:46:25 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ int		checkrng_int(char *str, int min, int max);
 int		checkrng_double(char *str, double min, double max);
 
 /* init_objects.c */
-void	add_objects(t_objs *objs, char **args, int type);
+t_objs	*add_objects(t_objs *objs, char **args, int type);
 void	init_type_obj(t_objs *obj, char **args, int type);
 
 #endif

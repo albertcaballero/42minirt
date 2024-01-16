@@ -14,7 +14,7 @@ SRC = ft_isalpha.c ft_memchr.c	ft_memset.c\
 	ft_strdup.c ft_striteri.c ft_strmapi.c ft_putchar_fd.c\
 	ft_itoa.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_putendl_fd.c\
 	ft_putnbr_fd.c ft_split_utils.c
-GNLSRC = gnl/get_next_line.c gnl/get_next_line_utils.c gnl/get_next_line.h
+GNLSRC = gnl/get_next_line.c gnl/get_next_line_utils.c
 SRC += $(GNLSRC)
 OBJS = $(SRC:.c=.o)
 

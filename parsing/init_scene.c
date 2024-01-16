@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:13:20 by alcaball          #+#    #+#             */
-/*   Updated: 2024/01/15 18:54:25 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:44:51 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,6 @@ void	init_type(t_scene *scene, char **args, int type)
 		scene->light.ratio = ft_atod(args[2]);
 	}
 	else
-		add_objects(scene->objs, args, type);
+		scene->objs = add_objects(scene->objs, args, type);
 	return ;
 }
