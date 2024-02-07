@@ -94,8 +94,8 @@ typedef struct s_ambientLight
 
 typedef struct s_camera
 {
-	t_vec	pos;
-	t_vec	rot;
+	t_vec	pos; //origin, *?
+	t_vec	rot; //direction, *?
 	int		fov;
 }	t_camera;
 
@@ -121,10 +121,11 @@ typedef struct s_objects
 
 typedef struct s_scene
 {
-	t_ambient	ambient;
-	t_camera	cam;
-	t_light		light;
+	t_camera	cam; //*?
 	t_objs		*objs;
+	t_ambient	ambient;
+	t_light		light;
+	//width/height?
 }	t_scene;
 
 // =================================== FUNCTIONS =============================
