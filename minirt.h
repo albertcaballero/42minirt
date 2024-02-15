@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/01/16 10:46:25 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:46:43 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "minilibx/mlx.h"
 # include <math.h>
 # include <fcntl.h>
+# include "vectors.h"
+
 // =================================== DEFINITIONS =============================
 # define WIN_H 800
 # define WIN_W 800
@@ -34,7 +36,7 @@
 # define FAN 0xa80874
 
 // ================================= STRUCTURES =============================
-/*  ===== VECTORS & UTILS ========== */
+/*  ===== INPUT ========== */
 typedef enum e_scenetypes
 {
 	AMBI = 1,
@@ -45,13 +47,6 @@ typedef enum e_scenetypes
 	PL = 6,
 	CN = 7
 }	t_stypes;
-
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_vec;
 
 typedef struct s_color
 {
@@ -146,7 +141,7 @@ int		check_identifiers(char *str);
 
 /* INIT_SCENE.C */
 void	init_type(t_scene *scene, char **args, int type);
-void			print_scene(t_scene *scene);
+void	print_scene(t_scene *scene);
 t_vec	parse_vector(char *line);
 t_color	parse_color(char *line);
 
