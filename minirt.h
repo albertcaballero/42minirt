@@ -129,6 +129,7 @@ typedef struct s_scene
 int		error_msg(char *msg);
 
 /* utils.c */
+void	*my_malloc(size_t size);
 double	ft_atod(char *str);
 t_objs	*ft_listlast_obj(t_objs *lst);
 

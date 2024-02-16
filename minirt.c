@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:29 by alcaball          #+#    #+#             */
-/*   Updated: 2024/01/15 18:21:30 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:59:53 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_scene	*scene;
 
-	scene = malloc(sizeof(*scene));
+	scene = my_malloc(sizeof(*scene));
 	scene->objs = NULL;
 	if (argc != 2)
 		return (error_msg("invalid argc"));
