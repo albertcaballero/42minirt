@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_mngr.c                                       :+:      :+:    :+:   */
+/*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/13 13:24:41 by alcaball          #+#    #+#             */
-/*   Updated: 2024/01/13 16:12:10 by alcaball         ###   ########.fr       */
+/*   Created: 2024/02/16 19:14:43 by alcaball          #+#    #+#             */
+/*   Updated: 2024/02/16 19:16:50 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#ifndef RAY_H
+# define RAY_H
 
-int	error_msg(char *msg)
+# include "minirt.h"
+
+typedef struct s_ray
 {
-	write (2, "Error: ", 7);
-	if (msg)
-		ft_putendl_fd(msg, 2);
-	else
-		write (2, "General Error\n", 15);
-	//free_all
-	exit(EXIT_FAILURE);
-	return (1);
-}
+	vec3	origin;
+	vec3	dir;
+	int		(*at)(double t);
+}	t_ray;
+
+#endif

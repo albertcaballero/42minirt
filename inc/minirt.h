@@ -3,25 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/15 16:46:43 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:22:34 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "libft/libft.h"
-# include "minilibx/mlx.h"
+# include <libft.h>
+# include <mlx.h>
 # include <math.h>
 # include <fcntl.h>
 # include "vectors.h"
 
 // =================================== DEFINITIONS =============================
-# define WIN_H 800
-# define WIN_W 800
+# define WIN_W 400
+# define ASP_R 16.0 / 9.0
+# define WIN_H 400 / ASP_R
+
+
+
+# define CLOSE 17
 
 /*========== COLORS ==========*/
 # define BLUE 0x0000FF
@@ -123,6 +128,23 @@ typedef struct s_scene
 	//width/height?
 }	t_scene;
 
+/*=============== MINILIBX ==========*/
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}	t_data;
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	t_data	img;
+}	t_mlx;
+
 // =================================== FUNCTIONS =============================
 /*========== MAIN =============*/
 /* ERROR_MNGR.C */
@@ -132,6 +154,7 @@ int		error_msg(char *msg);
 void	*my_malloc(size_t size);
 double	ft_atod(char *str);
 t_objs	*ft_listlast_obj(t_objs *lst);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 /*========== PARSING ==========*/
 /* open_map.c */

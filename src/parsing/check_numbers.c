@@ -6,11 +6,11 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:02:44 by alcaball          #+#    #+#             */
-/*   Updated: 2024/01/15 14:20:28 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:01:16 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minirt.h"
+#include <minirt.h>
 
 int	check_numbers(char *str, int f_decim)
 {

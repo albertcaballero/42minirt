@@ -6,11 +6,11 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:13:20 by alcaball          #+#    #+#             */
-/*   Updated: 2024/01/16 10:44:51 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:01:27 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minirt.h"
+#include <minirt.h>
 
 void	print_scene(t_scene *scene)
 {

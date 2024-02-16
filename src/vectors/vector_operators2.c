@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vector_operators2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:14:27 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/15 16:56:11 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:59:47 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minirt.h"
+#include <minirt.h>
 
 //dot == 0 vectors are orthogonal/perpendicular
 //dot == 1 vectors are parallel

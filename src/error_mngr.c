@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   error_mngr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/13 13:06:29 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/07 12:59:53 by alcaball         ###   ########.fr       */
+/*   Created: 2024/01/13 13:24:41 by alcaball          #+#    #+#             */
+/*   Updated: 2024/02/16 18:01:06 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include <minirt.h>
 
-int	main(int argc, char **argv)
+int	error_msg(char *msg)
 {
-	t_scene	*scene;
-
-	scene = my_malloc(sizeof(*scene));
-	scene->objs = NULL;
-	if (argc != 2)
-		return (error_msg("invalid argc"));
-	if (open_map(argv[1], scene) < 0)
-		return (error_msg("invalid argc"));
+	write (2, "Error: ", 7);
+	if (msg)
+		ft_putendl_fd(msg, 2);
+	else
+		write (2, "General Error\n", 15);
+	//free_all
+	exit(EXIT_FAILURE);
+	return (1);
 }
