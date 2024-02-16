@@ -37,10 +37,9 @@ make_mlx:
 	@$(MAKE) -C minilibx --no-print-directory
 
 clean:
-	@rm -f $(OBJS)
+	@rm -rf $(OBJS)
 	@$(MAKE) fclean -C libft --no-print-directory
 	@$(MAKE) fclean -C minilibx --no-print-directory
-	@rm -rf $(DIR_O)
 	@echo "$(RED)FDF OBJ DELETED$(NC)"
 
 fclean: clean
