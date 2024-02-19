@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/16 19:22:34 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/19 11:27:46 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,12 @@
 # include <mlx.h>
 # include <math.h>
 # include <fcntl.h>
-# include "vectors.h"
+# include <vectors.h>
+# include <ray.h>
 
 // =================================== DEFINITIONS =============================
-# define WIN_W 400
-# define ASP_R 16.0 / 9.0
-# define WIN_H 400 / ASP_R
-
-
+# define WIN_W 800
+# define WIN_H 800
 
 # define CLOSE 17
 
@@ -125,7 +123,8 @@ typedef struct s_scene
 	t_objs		*objs;
 	t_ambient	ambient;
 	t_light		light;
-	//width/height?
+	size_t		winsize;
+	double		asp_ratio;
 }	t_scene;
 
 /*=============== MINILIBX ==========*/
@@ -149,6 +148,9 @@ typedef struct s_mlx
 /*========== MAIN =============*/
 /* ERROR_MNGR.C */
 int		error_msg(char *msg);
+
+/* color.c */
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 /* utils.c */
 void	*my_malloc(size_t size);
@@ -176,5 +178,11 @@ int		checkrng_double(char *str, double min, double max);
 /* init_objects.c */
 t_objs	*add_objects(t_objs *objs, char **args, int type);
 void	init_type_obj(t_objs *obj, char **args, int type);
+
+/*========== RAYS ==========*/
+/* casting.c */
+void	cast_rays(t_mlx *mlx, t_scene *scene);
+
+
 
 #endif

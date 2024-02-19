@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:05:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/16 19:10:13 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/19 10:52:59 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	}
 }
 
-void	write_color(t_color color, int x, int y)
-{
+// void	write_color(t_color color, int x, int y)
+// {
 	
-}
+// }
