@@ -6,11 +6,11 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 16:03:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/01/15 18:04:25 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:01:37 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minirt.h"
+#include <minirt.h>
 
 int	check_identifiers(char *str)
 {

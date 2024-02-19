@@ -6,11 +6,11 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:13:20 by alcaball          #+#    #+#             */
-/*   Updated: 2024/01/16 10:44:51 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/19 10:59:17 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minirt.h"
+#include <minirt.h>
 
 void	print_scene(t_scene *scene)
 {
@@ -49,7 +49,7 @@ t_color	parse_color(char *line)
 	color.r = ft_atoi(spl[0]);
 	color.g = ft_atoi(spl[1]);
 	color.b = ft_atoi(spl[2]);
-	color.hex = 0x0; //rgb_to_hex
+	color.hex = (color.r << 16) + (color.g << 8) + color.b;
 	free_split(spl);
 	return (color);
 }
