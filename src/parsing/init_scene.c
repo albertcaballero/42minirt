@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:13:20 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/19 13:07:18 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:10:42 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	init_type(t_scene *scene, char **args, int type)
 		scene->cam.rot = parse_vector(args[2]);
 		checkrng_int(args[3], 1, 179);
 		scene->cam.fov = ft_atoi(args[3]);
-		calculate_viewport(&scene->cam);
+		calculate_viewport(scene);
 	}
 	else if (type == LIGHT)
 	{

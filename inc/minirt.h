@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/19 12:46:02 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:05:51 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,12 @@ typedef struct s_ambientLight
 
 typedef struct s_camera
 {
-	t_vec	pos; //origin, *?
-	t_vec	rot; //direction, *?
+	t_vec	pos; //origin
+	t_vec	rot; //direction
 	int		fov;
 	double	viewport_height;
 	double	viewport_width;
+	double	focal_len;
 }	t_camera;
 
 typedef struct s_light

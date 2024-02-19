@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:43:31 by jmarinel          #+#    #+#             */
-/*   Updated: 2024/02/15 17:00:44 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:38:59 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,8 @@ t_vec	*normalize_vec(t_vec *vec);
 double	dot_scalar_product(t_vec *vec1, t_vec *vec2);
 t_vec	*cross_product(t_vec *vec1, t_vec *vec2);
 
+/*========== ANGLES ==========*/
+double	deg2rad(double degrees);
+double	rad2deg(double radians);
 
 #endif
