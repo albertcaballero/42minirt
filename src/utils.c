@@ -6,11 +6,15 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:21:47 by alcaball          #+#    #+#             */
+<<<<<<< HEAD:utils.c
 /*   Updated: 2024/02/16 16:14:16 by alcaball         ###   ########.fr       */
+=======
+/*   Updated: 2024/02/16 19:08:33 by alcaball         ###   ########.fr       */
+>>>>>>> 2d2ae6380657bc6995a7163214c18f5794af760e:src/utils.c
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include <minirt.h>
 
 double	ft_atod(char *str)
 {
@@ -68,7 +72,11 @@ void	*my_malloc(size_t size)
 	if (thing == NULL)
 	{
 		write(2, "malloc error\n", 14);
+<<<<<<< HEAD:utils.c
 		exit(1);
+=======
+		exit (1);
+>>>>>>> 2d2ae6380657bc6995a7163214c18f5794af760e:src/utils.c
 	}
 	return (thing);
 }

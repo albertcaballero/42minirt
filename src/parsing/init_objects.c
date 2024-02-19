@@ -6,11 +6,11 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:17:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/07 12:57:04 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:01:24 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minirt.h"
+#include <minirt.h>
 
 t_objs	*add_objects(t_objs *objs, char **args, int type)
 {
