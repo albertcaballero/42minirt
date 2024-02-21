@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_objects.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:17:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/16 18:01:24 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:42:11 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ void	init_type_obj(t_objs *obj, char **args, int type)
 		obj->form.sp->diam = ft_atod(args[2]);
 		obj->form.sp->pos = parse_vector(args[1]);
 		obj->form.sp->col = parse_color(args[3]);
+	}
+	else if (type == PL)
+	{
+		
 	}
 	return ;
 }

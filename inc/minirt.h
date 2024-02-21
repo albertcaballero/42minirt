@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/19 11:27:46 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:48:38 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef struct s_camera
 {
 	t_vec	pos; //origin, *?
 	t_vec	rot; //direction, *?
-	int		fov;
+	int		fov; //apertura? 0-180?
 }	t_camera;
 
 typedef struct s_light
