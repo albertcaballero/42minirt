@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/21 15:52:46 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:58:44 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_camera
 	double	vp_h;
 	double	vp_w;
 	double	focal_len;
+	t_vec	center;
 	t_vec	vp_u;
 	t_vec	vp_v;
 	t_vec	px_dlt_u;
@@ -159,6 +160,7 @@ int		error_msg(char *msg);
 
 /* color.c */
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+t_color	new_color(unsigned char r, unsigned char g, unsigned char b);
 
 /* utils.c */
 void	*my_malloc(size_t size);

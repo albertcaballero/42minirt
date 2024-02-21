@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:14:27 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/21 15:39:52 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:29:28 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,6 @@ t_vec	substract_vec(t_vec *vec1, t_vec *vec2)
 
 	res = new_vec(vec1->x - vec2->x, vec1->y - vec2->y, vec1->z - vec2->z);
 	return (res);
-}
-
-void	scalar_mult_vec(t_vec *vec, double f)
-{
-	vec->x *= f;
-	vec->y *= f;
-	vec->z *= f;
-}
-
-void	scalar_div_vec(t_vec *vec, double f)
-{
-	vec->x /= f;
-	vec->y /= f;
-	vec->z /= f;
 }
 
 double	length_vec(t_vec *vec)
