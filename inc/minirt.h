@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/21 16:07:17 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:02:41 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 # define WIN_H 800
 
 # define CLOSE 17
+
+# define ERROR 1
+# define OK 0
+# define LIMIT_DIAM 99999
+# define LIMIT_HEIGHT 99999
+# define LIMIT_VEC 99999
 
 /*========== COLORS ==========*/
 # define BLUE 0x0000FF
@@ -175,13 +181,13 @@ int		check_identifiers(char *str);
 
 /* INIT_SCENE.C */
 void	init_type(t_scene *scene, char **args, int type);
-void	print_scene(t_scene *scene);
+void	print_scene(t_scene *scene, int type);
 t_vec	parse_vector(char *line);
 t_color	parse_color(char *line);
 
 /* check_numbers.c */
 int		checkrng_int(char *str, int min, int max);
-int		checkrng_double(char *str, double min, double max);
+int		checkrng_dbl(char *str, double min, double max);
 
 /* init_objects.c */
 t_objs	*add_objects(t_objs *objs, char **args, int type);
