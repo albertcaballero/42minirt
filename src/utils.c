@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:21:47 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/19 12:38:32 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:29:32 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,7 @@ void	*my_malloc(size_t size)
 	if (thing == NULL)
 	{
 		write(2, "malloc error\n", 14);
-<<<<<<< HEAD:utils.c
-		exit(1);
-=======
 		exit (1);
->>>>>>> 2d2ae6380657bc6995a7163214c18f5794af760e:src/utils.c
 	}
 	return (thing);
 }
