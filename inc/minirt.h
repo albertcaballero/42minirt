@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/21 13:48:38 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:07:17 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ typedef struct s_color
 typedef struct s_sphere
 {
 	double	diam;
-	t_vec	pos;
+	t_point	pos;
 	t_color	col;
 }	t_sp;
 
 typedef struct s_plane
 {
-	t_vec	pos;
-	t_vec	rot;
+	t_point	pos;
+	t_vec	dir;
 	t_color	col;
 }	t_pl;
 
@@ -78,8 +78,8 @@ typedef struct s_cylinder
 {
 	double	diam;
 	double	height;
-	t_vec	pos;
-	t_vec	rot;
+	t_point	pos;
+	t_vec	dir;
 	t_color	col;
 }	t_cy;
 
@@ -92,14 +92,22 @@ typedef struct s_ambientLight
 
 typedef struct s_camera
 {
-	t_vec	pos; //origin, *?
-	t_vec	rot; //direction, *?
-	int		fov; //apertura? 0-180?
+	t_point	pos;
+	t_vec	dir;
+	int		fov;
+	double	vp_h;
+	double	vp_w;
+	double	focal_len;
+	t_vec	vp_u;
+	t_vec	vp_v;
+	t_vec	px_dlt_u;
+	t_vec	px_dlt_v;
+	t_point	px00_loc;
 }	t_camera;
 
 typedef struct s_light
 {
-	t_vec	pos;
+	t_point	pos;
 	float	ratio;
 }	t_light;
 
@@ -178,6 +186,9 @@ int		checkrng_double(char *str, double min, double max);
 /* init_objects.c */
 t_objs	*add_objects(t_objs *objs, char **args, int type);
 void	init_type_obj(t_objs *obj, char **args, int type);
+
+/* init_camera.c */
+void	calculate_viewport(t_camera *cam);
 
 /*========== RAYS ==========*/
 /* casting.c */
