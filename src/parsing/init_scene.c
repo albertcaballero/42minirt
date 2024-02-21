@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:13:20 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/19 14:10:42 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:53:10 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_scene(t_scene *scene)
 	dprintf(2, "========= CAMERA ==============\n");
 	dprintf(2, "fov: %i\npos: %f,%f,%f\nrot:%f,%f,%f\n", scene->cam.fov, \
 		scene->cam.pos.x, scene->cam.pos.y, scene->cam.pos.z, \
-		scene->cam.rot.x, scene->cam.rot.y, scene->cam.rot.z);
+		scene->cam.dir.x, scene->cam.dir.y, scene->cam.dir.z);
 	dprintf(2, "========= LIGHT ===============\n");
 	dprintf(2, "ratio: %f\npos: %f,%f,%f\n", scene->light.ratio, \
 		scene->light.pos.x, scene->light.pos.y, scene->light.pos.z);
@@ -91,10 +91,10 @@ void	init_type(t_scene *scene, char **args, int type)
 		if (ft_splitlen(args) != 4)
 			error_msg("Camera: invalid arguments");
 		scene->cam.pos = parse_vector(args[1]);
-		scene->cam.rot = parse_vector(args[2]);
+		scene->cam.dir = parse_vector(args[2]);
 		checkrng_int(args[3], 1, 179);
 		scene->cam.fov = ft_atoi(args[3]);
-		calculate_viewport(scene);
+		calculate_viewport(&scene->cam);
 	}
 	else if (type == LIGHT)
 	{

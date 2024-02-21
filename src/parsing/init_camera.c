@@ -6,15 +6,21 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:10:02 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/19 16:04:57 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:52:25 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	calculate_viewport(t_scene *scene)
+void	calculate_viewport(t_camera *cam)
 {
-	scene->cam.focal_len = 1.0;
-	scene->cam.viewport_width = 2 * tan(deg2rad(scene->cam.fov) / 2);
-	scene->cam.viewport_height = scene->cam.viewport_width * ((double)WIN_H / (double)WIN_W);
+	cam->focal_len = 1.0;
+	cam->vp_w = 2 * tan(deg2rad(cam->fov) / 2);
+	cam->vp_h = cam->vp_w * ((double)WIN_H / (double)WIN_W);
+	cam->vp_u = new_vec(cam->vp_w, 0, 0);
+	cam->vp_v = new_vec(0, -cam->vp_h, 0);
+	scalar_div_vec(&cam->vp_u, WIN_W);
+	scalar_div_vec(&cam->vp_v, WIN_H);
+	// cam->px00_loc = ;
 }
+
