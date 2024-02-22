@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/21 18:02:41 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:04:48 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_camera
 	double	vp_h;
 	double	vp_w;
 	double	focal_len;
+	t_vec	center;
 	t_vec	vp_u;
 	t_vec	vp_v;
 	t_vec	px_dlt_u;
@@ -165,12 +166,13 @@ int		error_msg(char *msg);
 
 /* color.c */
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+t_color	new_color(unsigned char r, unsigned char g, unsigned char b);
+t_color	new_color_doub(double r, double g, double b);
 
 /* utils.c */
 void	*my_malloc(size_t size);
 double	ft_atod(char *str);
 t_objs	*ft_listlast_obj(t_objs *lst);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 /*========== PARSING ==========*/
 /* open_map.c */
