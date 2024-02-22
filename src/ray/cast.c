@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 10:42:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/22 12:52:55 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/22 19:12:18 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 
 double	hit_sphere(t_point *cent, double rad, t_ray *ray)//delete
 {
-	t_vec oc = substract_vec(&ray->origin, cent);
-	double a = dot_scalar_product(&ray->dir, &ray->dir);
-	double b = 2.0 * dot_scalar_product(&oc, &ray->dir);
-	double c = dot_scalar_product(&oc, &oc) - rad * rad;
-	double disc = b*b - 4*a*c;
+	t_vec	oc = substract_vec(&ray->origin, cent);
+	double	a = dot_scalar_product(&ray->dir, &ray->dir);
+	double	b = 2.0 * dot_scalar_product(&oc, &ray->dir);
+	double	c = dot_scalar_product(&oc, &oc) - rad * rad;
+	double	disc = b * b - 4 * a * c;
 
 	if (disc < 0)
 		return (-1.0);
 	else
-		return ((-b - sqrt(disc) ) / (2.0*a));
+		return ((-b - sqrt(disc)) / (2.0 * a));
 }
 
 t_color	ray_color(t_ray *ray)

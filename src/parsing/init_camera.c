@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_camera.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:10:02 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/22 12:31:06 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:03:59 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	calculate_viewport(t_camera *cam)
 	cam->vp_w = 2.0 * tan(deg2rad(cam->fov) / 2) * cam->focal_len;
 	cam->vp_h = cam->vp_w * ((double)WIN_H / (double)WIN_W);
 	cam->center = new_vec(0, 0, 0);
-	cam->vp_u = new_vec(cam->vp_w, 0, 0);
-	cam->vp_v = new_vec(0, -cam->vp_h, 0);
-	cam->px_dlt_u = scalar_div_vec_ret(&cam->vp_u, WIN_W);
+	cam->vp_u = new_vec(cam->vp_w, 0, 0); //x - r
+	cam->vp_v = new_vec(0, -cam->vp_h, 0); //y - d
+	cam->px_dlt_u = scalar_div_vec_ret(&cam->vp_u, WIN_W); //pixel unit ratio
 	cam->px_dlt_v = scalar_div_vec_ret(&cam->vp_v, WIN_H);
 	aux[0] = new_vec(0, 0, cam->focal_len);
 	aux[1] = scalar_div_vec_ret(&cam->vp_u, 2.0);
