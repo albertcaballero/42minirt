@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 10:42:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/22 12:41:07 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:52:55 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ double	hit_sphere(t_point *cent, double rad, t_ray *ray)//delete
 	double disc = b*b - 4*a*c;
 
 	if (disc < 0)
-        return -1.0;
+		return (-1.0);
 	else
-        return (-b - sqrt(disc) ) / (2.0*a);
+		return ((-b - sqrt(disc) ) / (2.0*a));
 }
 
 t_color	ray_color(t_ray *ray)
