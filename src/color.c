@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:05:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/21 18:58:28 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/22 10:56:03 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ t_color	new_color(unsigned char r, unsigned char g, unsigned char b)
 	color.r = r;
 	color.g = g;
 	color.b	= b;
+	color.hex = (color.r << 16) + (color.g << 8) + color.b;
+	return (color);
+}
+
+t_color	new_color_doub(double r, double g, double b)
+{
+	t_color	color;
+
+	color.r = (unsigned int)(r * 255.999);
+	color.g = (unsigned int)(g * 255.999);
+	color.b	= (unsigned int)(b * 255.999);
 	color.hex = (color.r << 16) + (color.g << 8) + color.b;
 	return (color);
 }

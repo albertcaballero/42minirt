@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/21 18:58:44 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:31:34 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,12 +161,12 @@ int		error_msg(char *msg);
 /* color.c */
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 t_color	new_color(unsigned char r, unsigned char g, unsigned char b);
+t_color	new_color_doub(double r, double g, double b);
 
 /* utils.c */
 void	*my_malloc(size_t size);
 double	ft_atod(char *str);
 t_objs	*ft_listlast_obj(t_objs *lst);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 /*========== PARSING ==========*/
 /* open_map.c */
