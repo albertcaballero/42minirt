@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:13:20 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/21 18:01:53 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:40:24 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,19 +97,17 @@ void	init_type(t_scene *scene, char **args, int type)
 {
 	if (type == AMBI)
 	{
-		if (ft_splitlen(args) != 3)
+		if (ft_splitlen(args) != 3 || checkrng_dbl(args[1], 0.0, 1.0))
 			error_msg("Ambient light: invalid arguments");
-		checkrng_dbl(args[1], 0.0, 1.0);
 		scene->ambient.ratio = ft_atod(args[1]);
 		scene->ambient.color = parse_color(args[2]);
 	}
 	else if (type == CAM)
 	{
-		if (ft_splitlen(args) != 4)
+		if (ft_splitlen(args) != 4 || checkrng_int(args[3], 1, 179))
 			error_msg("Camera: invalid arguments");
 		scene->cam.pos = parse_vector(args[1]);
 		scene->cam.dir = parse_vector(args[2]);
-		checkrng_int(args[3], 1, 179);
 		scene->cam.fov = ft_atoi(args[3]);
 		calculate_viewport(&scene->cam);
 	}
@@ -122,5 +120,4 @@ void	init_type(t_scene *scene, char **args, int type)
 	}
 	else
 		scene->objs = add_objects(scene->objs, args, type);
-	return ;
 }
