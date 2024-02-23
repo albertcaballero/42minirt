@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 19:14:43 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/23 12:59:03 by jmarinel         ###   ########.fr       */
+/*   Created: 2024/02/23 12:46:15 by jmarinel          #+#    #+#             */
+/*   Updated: 2024/02/23 13:34:28 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#include <minirt.h>
 
-# include "minirt.h"
-
-typedef struct s_ray
+t_color	nearest_hit(t_ray *ray, t_scene *scene)
 {
-	t_point	origin;
-	t_vec	dir;
-}	t_ray;
+	//ray starts at max length
+	double	ray_len;
+	t_color	color;
 
-t_vec	ray_at(t_ray *ray, double t);
-t_ray	new_ray(t_point *origin, t_point *dir);
-
-#endif
+	ray_len = INT_MAX;
+	//for each ray we check if it intersects, and store the distance to the point and the point
+	while (scene->objs)
+	{
+		//hit_sphere ?
+			//t_intersect = new intersect
+		//len < ray_len ? 
+			//ray_len = len;
+			
+		scene->objs = scene->objs->next;
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/22 16:04:48 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:00:34 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <vectors.h>
 # include <ray.h>
+# include <limits.h>
 
 // =================================== DEFINITIONS =============================
 # define WIN_W 800

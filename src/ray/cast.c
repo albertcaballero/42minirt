@@ -6,12 +6,11 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 10:42:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/23 12:04:19 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:45:42 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
-
 
 double	hit_sphere(t_point *cent, double rad, t_ray *ray)//delete
 {
@@ -27,6 +26,17 @@ double	hit_sphere(t_point *cent, double rad, t_ray *ray)//delete
 		return ((-b - sqrt(disc)) / (2.0 * a));
 }
 
+//DELETE FUNCTION ============================================
+double hit_plane(t_point *pos, t_vec *dir, t_ray *ray)
+{
+	double rest = pos->x * dir->x + pos->y * dir->y + pos->z * dir->z;
+	double a = dir->x * ray_at(ray, pos->z).x;
+	double b = dir->y * ray_at(ray, pos->z).y;
+	double c = dir->z * ray_at(ray, pos->z).z;
+	double result = a + b + c - rest;
+	return result;
+}//=========================================================
+
 t_color	ray_color(t_ray *ray, t_scene *scene)
 {
 	t_color	color;
@@ -34,11 +44,9 @@ t_color	ray_color(t_ray *ray, t_scene *scene)
 	t_vec	unit_dir;
 	double	a;
 
-	
-	//delete
-	//t_point sph = new_vec(0, 0, -1);
-	
-	double hit = hit_sphere(&scene->objs->form.sp->pos, 0.5, ray);
+	//delete from here ===================================
+	t_point sph = new_vec(0, 0, -1);
+	double hit = hit_sphere(&sph, 0.5, ray);
 	if (hit > 0.0)
 	{
 		t_vec rayat = ray_at(ray, hit);
@@ -47,7 +55,18 @@ t_color	ray_color(t_ray *ray, t_scene *scene)
 		t_vec nml = normalize_vec(&subs);
 		return (new_color_doub(0.5 * (nml.x + 1), 0.5 * (nml.y + 1), 0.5 * (nml.z + 1)));
 	}
-	//to here
+	t_point plane = new_vec(0, 0, -1.3);
+	t_vec	pldir = new_vec(0, -1, 0.3);
+	double hit2 = hit_plane(&plane, &pldir, ray);
+	if (hit2 > 0.0)
+	{
+		t_vec rayat = ray_at(ray, hit2);
+		t_vec rand = new_vec(0,0,-1);
+		t_vec subs = substract_vec(&rayat, &rand);
+		t_vec nml = normalize_vec(&subs);
+		return (new_color_doub(0.5 * (nml.x + 1), 0.5 * (nml.y + 1), 0.5 * (nml.z + 1)));
+	}
+	//to here ============================================
 
 	unit_dir = normalize_vec(&ray->dir);
 	a = 0.5 * (unit_dir.y + 1.0);
@@ -55,6 +74,7 @@ t_color	ray_color(t_ray *ray, t_scene *scene)
 	color2 = new_color_doub(a * 0.2, a * 0.7, a * 0.3);
 	return (new_color(color.r + color2.r, color.g + color2.g, color.b + color2.b));
 }
+
 
 void	cast_rays(t_mlx *mlx, t_scene *scene)
 {
@@ -79,9 +99,7 @@ void	cast_rays(t_mlx *mlx, t_scene *scene)
 			ray_dir = substract_vec(&px_center, &scene->cam.center);
 			ray = new_ray(&scene->cam.center, &ray_dir);
 			color = ray_color(&ray, scene);
-			// printf("pos[%i,%i] r=%i, g=%i, b=%i\n", i, j, color.r, color.g, color.b);
-			my_mlx_pixel_put(&mlx->img, i, j, color.hex);
-			i++;
+			my_mlx_pixel_put(&mlx->img, i++, j, color.hex);
 		}
 		j++;
 	}
