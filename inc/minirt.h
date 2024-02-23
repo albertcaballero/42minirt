@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/23 13:28:14 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:50:34 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,10 @@ typedef struct s_camera
 
 typedef struct s_light
 {
-	t_point	pos;
-	float	ratio;
+	t_point			pos;
+	float			ratio;
+	t_color			color;
+	struct s_light	*next;
 }	t_light;
 
 /*=============== SCENE ==========*/
@@ -131,7 +133,7 @@ typedef struct s_scene
 	t_camera	cam; //*?
 	t_objs		*objs;
 	t_ambient	ambient;
-	t_light		light;
+	t_light		*light;
 	size_t		winsize;
 	double		asp_ratio;
 }	t_scene;

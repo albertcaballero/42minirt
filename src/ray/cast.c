@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 10:42:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/23 13:46:46 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:36:59 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ t_color	ray_color(t_ray *ray, t_scene *scene)
 	double hit = hit_sphere(&test_sph, ray);
 	if (hit > 0.0)
 	{
-		t_vec rayat = ray_at(ray, hit);
-		t_vec rand = new_vec(0,0,-1);
-		t_vec subs = substract_vec(&rayat, &rand);
-		t_vec nml = normalize_vec(&subs);
-		color = new_color_doub(0.5 * (nml.x + 1), 0.5 * (nml.y + 1), 0.5 * (nml.z + 1));
-		color = mix_colors(scene->ambient.color, color,  scene->ambient.ratio);
+		// t_vec rayat = ray_at(ray, hit);
+		// t_vec rand = new_vec(0,0,-1);
+		// t_vec subs = substract_vec(&rayat, &rand);
+		// t_vec nml = normalize_vec(&subs);
+		color = new_color_doub(0.1, 0.7, 0.5);
+		color = mix_colors(scene->ambient.color, color, scene->ambient.ratio);
 		return (color);
 	}
 	//to here ============================================
@@ -83,7 +83,6 @@ void	cast_rays(t_mlx *mlx, t_scene *scene)
 			ray_dir = substract_vec(&px_center, &scene->cam.center);
 			ray = new_ray(&scene->cam.center, &ray_dir);
 			color = ray_color(&ray, scene);
-			// color = mix_colors(color, scene->ambient.color, scene->ambient.ratio);
 			my_mlx_pixel_put(&mlx->img, i, j, color.hex);
 			i++;
 		}
