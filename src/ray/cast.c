@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 10:42:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/22 19:12:18 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:04:19 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,18 @@ double	hit_sphere(t_point *cent, double rad, t_ray *ray)//delete
 		return ((-b - sqrt(disc)) / (2.0 * a));
 }
 
-t_color	ray_color(t_ray *ray)
+t_color	ray_color(t_ray *ray, t_scene *scene)
 {
 	t_color	color;
 	t_color	color2;
 	t_vec	unit_dir;
 	double	a;
 
+	
 	//delete
-	t_point sph = new_vec(0, 0, -1);
-	double hit = hit_sphere(&sph, 0.5, ray);
+	//t_point sph = new_vec(0, 0, -1);
+	
+	double hit = hit_sphere(&scene->objs->form.sp->pos, 0.5, ray);
 	if (hit > 0.0)
 	{
 		t_vec rayat = ray_at(ray, hit);
@@ -76,7 +78,7 @@ void	cast_rays(t_mlx *mlx, t_scene *scene)
 			px_center = add_vec(&scene->cam.px00_loc, &tmp[2]);
 			ray_dir = substract_vec(&px_center, &scene->cam.center);
 			ray = new_ray(&scene->cam.center, &ray_dir);
-			color = ray_color(&ray);
+			color = ray_color(&ray, scene);
 			// printf("pos[%i,%i] r=%i, g=%i, b=%i\n", i, j, color.r, color.g, color.b);
 			my_mlx_pixel_put(&mlx->img, i, j, color.hex);
 			i++;
