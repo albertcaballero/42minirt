@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/23 15:50:34 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/24 12:38:04 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,9 @@ void	init_type_obj(t_objs *obj, char **args, int type);
 
 /* init_camera.c */
 void	calculate_viewport(t_camera *cam);
+
+/* init_lights.c */
+void	init_lights(t_scene *scene, char **args);
 
 /*========== RAYS ==========*/
 /* casting.c */

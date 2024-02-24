@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 10:42:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/23 15:36:59 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/24 15:11:58 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ double	hit_sphere(t_sp *sphere, t_ray *ray)
 
 t_color	ray_color(t_ray *ray, t_scene *scene)
 {
-	t_color	color;
-	t_color	color2;
 	t_vec	unit_dir;
 	t_sp	test_sph;
 	double	a;
@@ -42,22 +40,12 @@ t_color	ray_color(t_ray *ray, t_scene *scene)
 	test_sph.col = new_color(255, 0, 0);
 	double hit = hit_sphere(&test_sph, ray);
 	if (hit > 0.0)
-	{
-		// t_vec rayat = ray_at(ray, hit);
-		// t_vec rand = new_vec(0,0,-1);
-		// t_vec subs = substract_vec(&rayat, &rand);
-		// t_vec nml = normalize_vec(&subs);
-		color = new_color_doub(0.1, 0.7, 0.5);
-		color = mix_colors(scene->ambient.color, color, scene->ambient.ratio);
-		return (color);
-	}
+		return (mix_colors(scene->ambient.color, test_sph.col, scene->ambient.ratio));
 	//to here ============================================
 
 	unit_dir = normalize_vec(&ray->dir);
 	a = 0.5 * (unit_dir.y + 1.0);
-	color = new_color_doub(1.0, 1.0, 1.0);
-	color2 = new_color_doub(0.2, 0.7, 0.3);
-	return (mix_colors(color2, color, a));
+	return (mix_colors(new_color_doub(0.2, 0.7, 0.3), new_color_doub(1.0, 1.0, 1.0), a));
 }
 
 void	cast_rays(t_mlx *mlx, t_scene *scene)
