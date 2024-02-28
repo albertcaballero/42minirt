@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 10:42:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/24 15:11:58 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:25:56 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_color	ray_color(t_ray *ray, t_scene *scene)
 	t_vec	unit_dir;
 	t_sp	test_sph;
 	double	a;
+	t_hit	rec;
+	double ratio;
 
 	//delete from here ===================================
 	test_sph.pos = new_vec(0, 0, -1);
@@ -40,7 +42,14 @@ t_color	ray_color(t_ray *ray, t_scene *scene)
 	test_sph.col = new_color(255, 0, 0);
 	double hit = hit_sphere(&test_sph, ray);
 	if (hit > 0.0)
-		return (mix_colors(scene->ambient.color, test_sph.col, scene->ambient.ratio));
+	{
+		unit_dir = ray_at(ray, hit);
+		rec.normal = substract_vec(&test_sph.pos, &unit_dir);
+		// printf("x=%f,y=%f,z=%f\n", rec.normal.x, rec.normal.y, rec.normal.z);
+		scalar_div_vec(&rec.normal, test_sph.diam * 0.5);
+		ratio = get_next_ligth(scene, ray->dir, &rec);
+		return (mix_colors(test_sph.col, new_color(255, 255, 255), ratio));
+	}
 	//to here ============================================
 
 	unit_dir = normalize_vec(&ray->dir);

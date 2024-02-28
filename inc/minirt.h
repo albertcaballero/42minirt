@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/24 12:38:04 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:03:52 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@ typedef struct s_color
 	unsigned char	b;
 	int				hex;
 }	t_color;
+
+typedef struct s_hit
+{
+	t_vec	normal;
+	t_point	p;
+	t_color	color;
+	double	t;
+	double	t_max;
+	double	t_min;
+}	t_hit;
 
 /* ==========  OBJECTS  ========== */
 typedef struct s_sphere
@@ -201,6 +211,11 @@ void	init_lights(t_scene *scene, char **args);
 /*========== RAYS ==========*/
 /* casting.c */
 void	cast_rays(t_mlx *mlx, t_scene *scene);
+t_color	ray_color(t_ray *ray, t_scene *scene);
+
+/* find_lights.c */
+double	get_next_ligth(t_scene *scene, t_point origin, t_hit *rec);
+
 
 
 

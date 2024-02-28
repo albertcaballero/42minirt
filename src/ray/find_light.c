@@ -6,25 +6,32 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:46:48 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/24 18:27:44 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:26:05 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	get_next_ligth(t_scene *scene, t_point origin)
+double	get_next_ligth(t_scene *scene, t_point origin, t_hit *rec)
 {
-	t_vec	p2l; //point to light
-	t_ray	ray;
+	t_ray light;
+	double dotprod;
+	double	final;
 
-	while (scene->light)
-	{
-		p2l = substract_vec(&scene->light->pos, &origin);
-		p2l = normalize_vec(&p2l);
-		ray = new_ray(&origin, &p2l);
-		scene->light = scene->light->next;
-	}
+	(void) scene;
+	// while (scene->light)
+	// {
+		light.origin = new_vec(0, 0.4, -0.5);
+		light.dir = substract_vec(&light.origin, &origin);
+		light.dir = normalize_vec(&light.dir);
+		dotprod = dot_scalar_product(&rec->normal, &light.dir);
+		//falta update rec->t_max para que no reimpacte consigo mismo por dento
+		final = 0.5 * dotprod;
+		// scene->light = scene->light->next;
+	// }
+	return final;
 }
+
 /*
 final color is affected by:
 	1. object original color
@@ -35,7 +42,7 @@ todo esto se tiene que computar y sumar/racionar para que tengamos el color fina
 pero no se como xd
 */
 
-/* while (objects) {
+/* while (objects) { //hit function
 	if (object->hit(ray, ray_tmin, closest_so_far, temp_rec)) {
 		hit_anything = true;
 		closest_so_far = temp_rec.t;
@@ -45,10 +52,4 @@ pero no se como xd
 we update ray_tmax (closest_so_far) so for each object it will be reduced and it will
 keep the shortest distance (it wont hit if the obj is further than the temp_rec).
 temp_rec keeps the position, the normal, the t and color
-temp_rec {
-	t_point	p;
-    t_vec3	normal;
-    double	t;
-    bool	front_face;
-}
 */
