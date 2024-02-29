@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:46:48 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/28 18:26:05 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/29 10:53:59 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,16 @@ double	get_next_ligth(t_scene *scene, t_point origin, t_hit *rec)
 	double dotprod;
 	double	final;
 
-	(void) scene;
 	// while (scene->light)
 	// {
-		light.origin = new_vec(0, 0.4, -0.5);
+		light.origin = scene->light->pos;
 		light.dir = substract_vec(&light.origin, &origin);
 		light.dir = normalize_vec(&light.dir);
 		dotprod = dot_scalar_product(&rec->normal, &light.dir);
 		//falta update rec->t_max para que no reimpacte consigo mismo por dento
-		final = 0.5 * dotprod;
+		final = scene->light->ratio * dotprod;
+		if (final > 0.0)
+			final *= -1;
 		// scene->light = scene->light->next;
 	// }
 	return final;

@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:29 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/28 18:07:42 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/29 10:13:21 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int mlx_recalc_point(int button, int x, int y, t_scene *scene) //delete
 
 	if (button != 1)
 		return (1);
+	printf("=========pixel[%i, %i]==========\n", x, y);
 	tmp[0] = scalar_mult_vec_ret(&scene->cam.px_dlt_u, x);
 	tmp[1] = scalar_mult_vec_ret(&scene->cam.px_dlt_v, y);
 	tmp[2] = add_vec(&tmp[0], &tmp[1]);
@@ -29,7 +30,7 @@ int mlx_recalc_point(int button, int x, int y, t_scene *scene) //delete
 	ray_dir = substract_vec(&px_center, &scene->cam.center);
 	ray = new_ray(&scene->cam.center, &ray_dir);
 	color = ray_color(&ray, scene);
-	printf("%i, %i, %i\n", color.r, color.g, color.b);
+	printf("Color %i, %i, %i\n", color.r, color.g, color.b);
 	return (0);
 }
 
