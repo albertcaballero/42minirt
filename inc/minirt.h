@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/28 18:03:52 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:43:08 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_camera
 	t_vec	center;
 	t_vec	vp_u;
 	t_vec	vp_v;
+	t_vec	vup;
 	t_vec	px_dlt_u;
 	t_vec	px_dlt_v;
 	t_point	px00_loc;
