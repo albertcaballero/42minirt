@@ -135,13 +135,34 @@ typedef struct s_objects
 
 typedef struct s_scene
 {
-	t_camera	cam; //*?
+	t_camera	cam;
 	t_objs		*objs;
 	t_ambient	ambient;
 	t_light		light;
 	size_t		winsize;
 	double		asp_ratio;
 }	t_scene;
+
+/*=============== HIT ==========*/
+typedef struct s_evars
+{
+	double				a;
+	double				half_b;
+	double				c;
+	double				discriminant;
+	double				root;
+	double				sqrtd;
+}						t_evars;
+
+typedef struct s_hit
+{
+	t_objs				*obj;
+	t_point				point;
+	t_vec				normal;
+	double				t;
+	double				ray_tmin;
+	double				ray_tmax;
+}						t_hit;
 
 /*=============== MINILIBX ==========*/
 typedef struct s_data
