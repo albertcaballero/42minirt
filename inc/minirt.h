@@ -144,15 +144,15 @@ typedef struct s_scene
 }	t_scene;
 
 /*=============== HIT ==========*/
-typedef struct s_evars
+typedef struct s_hit_calc
 {
 	double				a;
 	double				half_b;
 	double				c;
 	double				discriminant;
 	double				root;
-	double				sqrtd;
-}						t_evars;
+	double				sqrt;
+}						t_hcalc;
 
 typedef struct s_hit
 {
