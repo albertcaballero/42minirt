@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:05:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/22 10:56:03 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:35:40 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,16 @@ t_color	new_color_doub(double r, double g, double b)
 	color.b	= (unsigned int)(b * 255.999);
 	color.hex = (color.r << 16) + (color.g << 8) + color.b;
 	return (color);
+}
+
+//ratio is for color1 (e.g. ratio 0.7 is 70% color1, 30% color2)
+t_color	mix_colors(t_color col1, t_color col2, double ratio)
+{
+	t_color	new;
+
+	new.r = ratio * col1.r + (1 - ratio) * col2.r;
+	new.g = ratio * col1.g + (1 - ratio) * col2.g;
+	new.b = ratio * col1.b + (1 - ratio) * col2.b;
+	new.hex = (new.r << 16) + (new.g << 8) + new.b;
+	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:10:02 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/22 18:03:59 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:16:33 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,29 @@ void	calculate_viewport(t_camera *cam)
 {
 	t_vec	vp_up_left;
 	t_vec	aux[5];
+	t_vec	tmpaxis;
+	t_vec	axis[3]; //u, v, w
 
 	cam->focal_len = 1.0;
 	cam->vp_w = 2.0 * tan(deg2rad(cam->fov) / 2) * cam->focal_len;
 	cam->vp_h = cam->vp_w * ((double)WIN_H / (double)WIN_W);
 	cam->center = new_vec(0, 0, 0);
-	cam->vp_u = new_vec(cam->vp_w, 0, 0); //x - r
-	cam->vp_v = new_vec(0, -cam->vp_h, 0); //y - d
-	cam->px_dlt_u = scalar_div_vec_ret(&cam->vp_u, WIN_W); //pixel unit ratio
+	cam->vup = new_vec(0, 1, 0);
+	axis[2] = cam->dir;
+	// scalar_mult_vec(&axis[2], -1);
+	tmpaxis = cross_product(&cam->vup, &axis[2]);
+	axis[0] = normalize_vec(&tmpaxis);
+	axis[1] = cross_product(&axis[2], &axis[0]);
+	cam->vp_u = scalar_mult_vec_ret(&axis[0], cam->vp_w);
+	tmpaxis = scalar_mult_vec_ret(&axis[1], -1);
+	cam->vp_v = scalar_mult_vec_ret(&tmpaxis, cam->vp_h);
+	cam->px_dlt_u = scalar_div_vec_ret(&cam->vp_u, WIN_W);
 	cam->px_dlt_v = scalar_div_vec_ret(&cam->vp_v, WIN_H);
-	aux[0] = new_vec(0, 0, cam->focal_len);
+	scalar_mult_vec(&axis[2], cam->focal_len);
 	aux[1] = scalar_div_vec_ret(&cam->vp_u, 2.0);
 	aux[2] = scalar_div_vec_ret(&cam->vp_v, 2.0);
 	aux[3] = add_vec(&aux[1], &aux[2]);
-	aux[4] = substract_vec(&cam->center, &aux[0]);
+	aux[4] = substract_vec(&cam->center, &axis[2]);
 	vp_up_left = substract_vec(&aux[4], &aux[3]);
 	calculate_px00_loc(cam, &vp_up_left);
 }

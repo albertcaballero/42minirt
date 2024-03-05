@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 10:42:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/05 15:53:20 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:17:39 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	cast_rays(t_mlx *mlx, t_scene *scene)
 			ray_dir = substract_vec(&px_center, &scene->cam.center);
 			ray = new_ray(&scene->cam.center, &ray_dir);
 			color = ray_color(&ray, scene);
-			my_mlx_pixel_put(&mlx->img, i++, j, color.hex);
+			my_mlx_pixel_put(&mlx->img, i, j, color.hex);
+			i++;
 		}
 		j++;
 	}

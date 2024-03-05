@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:13:20 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/05 16:02:52 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:17:00 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,7 @@ void	init_type(t_scene *scene, char **args, int type)
 		calculate_viewport(&scene->cam);
 	}
 	else if (type == LIGHT)
-	{
-		if (ft_splitlen(args) != 4)
-			error_msg("Light: invalid arguments");
-		scene->light.pos = parse_vector(args[1]);
-		scene->light.ratio = ft_atod(args[2]);
-	}
+		init_lights(scene, args);
 	else
 		scene->objs = add_objects(scene->objs, args, type);
 }
