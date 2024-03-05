@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 10:42:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/29 15:42:38 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:32:06 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ t_color	ray_color(t_ray *ray, t_scene *scene)
 
 	//delete from here ===================================
 	light_bulb.pos = scene->light->pos;
-	light_bulb.diam = 0.1;
+	light_bulb.diam = 0.01;
 	light_bulb.col = new_color (0, 0, 0);
 	hit = hit_sphere(&light_bulb, ray);
 	if (hit > 0.0)
-		return (new_color(0, 0, 0));
-	test_sph.pos = new_vec(0, 0, -1);
+		return (light_bulb.col);
+	test_sph.pos = new_vec(-0, 0, -2);
 	test_sph.diam = 0.5;
 	test_sph.col = new_color(255, 0, 0);
 	hit = hit_sphere(&test_sph, ray);
