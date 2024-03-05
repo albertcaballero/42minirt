@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:13:20 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/22 13:40:24 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:02:52 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,23 @@ void	print_scene(t_scene *scene, int type)
 	if (type == SP )
 	{
 		dprintf(2, "========= SPHERE ===============\n");
-		dprintf(2, "diam: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", scene->objs->form.sp->diam, \
+		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", scene->objs->form.sp->rad, \
 			scene->objs->form.sp->pos.x, scene->objs->form.sp->pos.y, scene->objs->form.sp->pos.z, \
-			scene->objs->form.sp->col.r, scene->objs->form.sp->col.g, scene->objs->form.sp->col.b);
+			scene->objs->col.r, scene->objs->col.g, scene->objs->col.b);
 	}
 	else if (type == PL )
 	{
 		dprintf(2, "========= PLANE ===============\n");
-		dprintf(2, "diam: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", scene->objs->form.sp->diam, \
+		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", scene->objs->form.sp->rad, \
 			scene->objs->form.pl->pos.x, scene->objs->form.pl->pos.y, scene->objs->form.pl->pos.z, \
-			scene->objs->form.pl->col.r, scene->objs->form.pl->col.g, scene->objs->form.pl->col.b);
+			scene->objs->col.r, scene->objs->col.g, scene->objs->col.b);
 	}
 	else if (type == CY )
 	{
 		dprintf(2, "========= CYLINDER ===============\n");
-		dprintf(2, "diam: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", scene->objs->form.sp->diam, \
+		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", scene->objs->form.sp->rad, \
 			scene->objs->form.cy->pos.x, scene->objs->form.cy->pos.y, scene->objs->form.cy->pos.z, \
-			scene->objs->form.cy->col.r, scene->objs->form.cy->col.g, scene->objs->form.cy->col.b);
+			scene->objs->col.r, scene->objs->col.g, scene->objs->col.b);
 	}
 }
 

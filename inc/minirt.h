@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/23 13:00:34 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:55:28 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <vectors.h>
 # include <ray.h>
 # include <limits.h>
+# include <stdbool.h>
 
 // =================================== DEFINITIONS =============================
 # define WIN_W 800
@@ -29,7 +30,7 @@
 
 # define ERROR 1
 # define OK 0
-# define LIMIT_DIAM 99999
+# define LIMIT_RAD 99999
 # define LIMIT_HEIGHT 99999
 # define LIMIT_VEC 99999
 
@@ -69,25 +70,22 @@ typedef struct s_color
 /* ==========  OBJECTS  ========== */
 typedef struct s_sphere
 {
-	double	diam;
+	double	rad;
 	t_point	pos;
-	t_color	col;
 }	t_sp;
 
 typedef struct s_plane
 {
-	t_point	pos;
 	t_vec	dir;
-	t_color	col;
+	t_point	pos;
 }	t_pl;
 
 typedef struct s_cylinder
 {
-	double	diam;
+	double	rad;
 	double	height;
 	t_point	pos;
 	t_vec	dir;
-	t_color	col;
 }	t_cy;
 
 /*=============== IDENTIFIERS  ==========*/
@@ -127,9 +125,34 @@ typedef union u_forms
 	t_pl	*pl;
 }	t_forms;
 
+
+
+/*=============== HIT ==========*/
+typedef struct s_hit_calc
+{
+	double				a;
+	double				b;
+	double				c;
+	double				disc;
+	double				root;
+	double				sqrt;
+}						t_hcalc;
+
+typedef struct s_hit
+{
+	struct s_objects	*obj;
+	t_point				point;
+	t_vec				normal;
+	double				t;
+	double				ray_tmin;
+	double				ray_tmax;
+}						t_hit;
+
 typedef struct s_objects
 {
 	t_forms				form;
+	t_color				col;
+	bool				(*hit)(t_ray *, t_forms *, t_hit *);
 	struct s_objects	*next;
 }	t_objs;
 
@@ -142,27 +165,6 @@ typedef struct s_scene
 	size_t		winsize;
 	double		asp_ratio;
 }	t_scene;
-
-/*=============== HIT ==========*/
-typedef struct s_hit_calc
-{
-	double				a;
-	double				half_b;
-	double				c;
-	double				discriminant;
-	double				root;
-	double				sqrt;
-}						t_hcalc;
-
-typedef struct s_hit
-{
-	t_objs				*obj;
-	t_point				point;
-	t_vec				normal;
-	double				t;
-	double				ray_tmin;
-	double				ray_tmax;
-}						t_hit;
 
 /*=============== MINILIBX ==========*/
 typedef struct s_data
@@ -224,6 +226,8 @@ void	calculate_viewport(t_camera *cam);
 /* casting.c */
 void	cast_rays(t_mlx *mlx, t_scene *scene);
 
-
+/* hit.c */
+t_hit	nearest_hit(t_ray *ray, t_scene *scene);
+bool	hit_sphere(t_ray *ray, t_forms *form, t_hit *rec);
 
 #endif

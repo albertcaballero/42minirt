@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_operators.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:14:27 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/21 17:29:28 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:16:05 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,13 @@ double	length_vec(t_vec *vec)
 	double	length;
 
 	length = sqrt(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
+	return (length);
+}
+
+double	length_squared(t_vec *vec)
+{
+	double	length;
+
+	length = (vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 	return (length);
 }
