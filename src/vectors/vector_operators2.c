@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:14:27 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/21 15:44:19 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/22 10:54:00 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,12 @@ t_vec	normalize_vec(t_vec *vec)
 
 	new = new_vec(vec->x, vec->y, vec->z);
 	len = length_vec(vec);
-	inv_len = 0;
 	if (len > 0)
 	{
-		inv_len = 1 / len;
-		new.x *= inv_len;
-		new.y *= inv_len;
-		new.z *= inv_len;
+		inv_len = 1.0 / len;
+		new.x = vec->x * inv_len;
+		new.y = vec->y * inv_len;
+		new.z = vec->z * inv_len;
 	}
 	return (new);
 }

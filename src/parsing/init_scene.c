@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:13:20 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/21 15:53:10 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/24 12:40:42 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	print_scene(t_scene *scene)
 		scene->cam.pos.x, scene->cam.pos.y, scene->cam.pos.z, \
 		scene->cam.dir.x, scene->cam.dir.y, scene->cam.dir.z);
 	dprintf(2, "========= LIGHT ===============\n");
-	dprintf(2, "ratio: %f\npos: %f,%f,%f\n", scene->light.ratio, \
-		scene->light.pos.x, scene->light.pos.y, scene->light.pos.z);
+	dprintf(2, "ratio: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", scene->light->ratio, \
+		scene->light->pos.x, scene->light->pos.y, scene->light->pos.z, \
+		scene->light->color.r, scene->light->color.g, scene->light->color.b);
 	dprintf(2, "========= SPHERE ===============\n");
 	dprintf(2, "diam: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", scene->objs->form.sp->diam, \
 		scene->objs->form.sp->pos.x, scene->objs->form.sp->pos.y, scene->objs->form.sp->pos.z, \
@@ -97,12 +98,7 @@ void	init_type(t_scene *scene, char **args, int type)
 		calculate_viewport(&scene->cam);
 	}
 	else if (type == LIGHT)
-	{
-		if (ft_splitlen(args) != 4)
-			error_msg("Light: invalid arguments");
-		scene->light.pos = parse_vector(args[1]);
-		scene->light.ratio = ft_atod(args[2]);
-	}
+		init_lights(scene, args);
 	else
 		scene->objs = add_objects(scene->objs, args, type);
 	return ;

@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/21 15:52:46 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:43:08 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,16 @@ typedef struct s_color
 	int				hex;
 }	t_color;
 
+typedef struct s_hit
+{
+	t_vec	normal;
+	t_point	p;
+	t_color	color;
+	double	t;
+	double	t_max;
+	double	t_min;
+}	t_hit;
+
 /* ==========  OBJECTS  ========== */
 typedef struct s_sphere
 {
@@ -98,8 +108,10 @@ typedef struct s_camera
 	double	vp_h;
 	double	vp_w;
 	double	focal_len;
+	t_vec	center;
 	t_vec	vp_u;
 	t_vec	vp_v;
+	t_vec	vup;
 	t_vec	px_dlt_u;
 	t_vec	px_dlt_v;
 	t_point	px00_loc;
@@ -107,8 +119,10 @@ typedef struct s_camera
 
 typedef struct s_light
 {
-	t_point	pos;
-	float	ratio;
+	t_point			pos;
+	float			ratio;
+	t_color			color;
+	struct s_light	*next;
 }	t_light;
 
 /*=============== SCENE ==========*/
@@ -130,7 +144,7 @@ typedef struct s_scene
 	t_camera	cam; //*?
 	t_objs		*objs;
 	t_ambient	ambient;
-	t_light		light;
+	t_light		*light;
 	size_t		winsize;
 	double		asp_ratio;
 }	t_scene;
@@ -159,12 +173,14 @@ int		error_msg(char *msg);
 
 /* color.c */
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+t_color	new_color(unsigned char r, unsigned char g, unsigned char b);
+t_color	new_color_doub(double r, double g, double b);
+t_color	mix_colors(t_color col1, t_color col2, double ratio);
 
 /* utils.c */
 void	*my_malloc(size_t size);
 double	ft_atod(char *str);
 t_objs	*ft_listlast_obj(t_objs *lst);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 /*========== PARSING ==========*/
 /* open_map.c */
@@ -190,9 +206,17 @@ void	init_type_obj(t_objs *obj, char **args, int type);
 /* init_camera.c */
 void	calculate_viewport(t_camera *cam);
 
+/* init_lights.c */
+void	init_lights(t_scene *scene, char **args);
+
 /*========== RAYS ==========*/
 /* casting.c */
 void	cast_rays(t_mlx *mlx, t_scene *scene);
+t_color	ray_color(t_ray *ray, t_scene *scene);
+
+/* find_lights.c */
+double	get_next_ligth(t_scene *scene, t_point origin, t_hit *rec);
+
 
 
 
