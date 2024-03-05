@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:13:20 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/05 16:17:00 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:22:24 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	print_scene(t_scene *scene, int type)
 		scene->cam.pos.x, scene->cam.pos.y, scene->cam.pos.z, \
 		scene->cam.dir.x, scene->cam.dir.y, scene->cam.dir.z);
 	dprintf(2, "========= LIGHT ===============\n");
-	dprintf(2, "ratio: %f\npos: %f,%f,%f\n", scene->light.ratio, \
-		scene->light.pos.x, scene->light.pos.y, scene->light.pos.z);
+	dprintf(2, "ratio: %f\npos: %f,%f,%f\n", scene->light->ratio, \
+		scene->light->pos.x, scene->light->pos.y, scene->light->pos.z);
 	if (type == SP )
 	{
 		dprintf(2, "========= SPHERE ===============\n");

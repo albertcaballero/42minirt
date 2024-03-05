@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/05 16:18:33 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:21:16 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,6 @@ typedef struct s_color
 	int				hex;
 }	t_color;
 
-typedef struct s_hit
-{
-	t_vec	normal;
-	t_point	p;
-	t_color	color;
-	double	t;
-	double	t_max;
-	double	t_min;
-}	t_hit;
 
 /* ==========  OBJECTS  ========== */
 typedef struct s_sphere
@@ -155,6 +146,7 @@ typedef struct s_hit
 {
 	struct s_objects	*obj;
 	t_point				point;
+	t_color				color;
 	t_vec				normal;
 	double				t;
 	double				ray_tmin;

@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:46:15 by jmarinel          #+#    #+#             */
-/*   Updated: 2024/03/05 15:11:37 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:23:21 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,3 @@ t_hit	nearest_hit(t_ray *ray, t_scene *scene)
 	}
 	return (rec);
 }
-
-
-
-/*ray_color
-
-	objeto = nearest_hit
-	
-	*/

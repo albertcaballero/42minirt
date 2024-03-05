@@ -15,11 +15,9 @@ HEADER_FILES = minirt.h vectors.h
 HEADERS = $(addprefix inc/,$(HEADER_FILES))
 INCLUDES = -I libft/ -I inc/ -I minilibx/
 
-SRC_PARS = parsing/open_map.c parsing/check_numbers.c parsing/init_scene.c parsing/parse_lines.c parsing/init_objects.c parsing/init_camera.c
-SRC_RAY = ray/ray.c ray/cast.c ray/hit.c
-SRC_PARS = parsing/open_map.c parsing/check_numbers.c parsing/init_scene.c parsing/parse_lines.c parsing/init_objects.c\
-	parsing/init_camera.c parsing/init_lights.c
-SRC_RAY = ray/ray.c ray/cast.c ray/find_light.c
+SRC_PARS = parsing/open_map.c parsing/check_numbers.c parsing/init_scene.c parsing/parse_lines.c parsing/init_objects.c parsing/init_camera.c \
+	parsing/init_lights.c
+SRC_RAY = ray/ray.c ray/cast.c ray/hit.c ray/find_light.c
 SRC_VECTORS = vectors/vector_operators.c vectors/vector_operators2.c vectors/angles.c vectors/vector_operators3.c
 SRC_MAIN = minirt.c error_mngr.c utils.c color.c
 SOURCES = $(SRC_MAIN) $(SRC_PARS) $(SRC_RAY) $(SRC_VECTORS)
