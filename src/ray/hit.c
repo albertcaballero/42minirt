@@ -12,6 +12,27 @@
 
 #include <minirt.h>
 
+bool	hit_plane(t_ray *ray, t_forms *form, t_hit *rec)
+{
+	t_pl	*pl;
+	t_vec 	otp;
+	double	denom;
+	double	t;
+
+	pl = form->pl;
+	denom = dot_scalar_product(&pl->dir, &ray->dir);
+	if (fabs(denom) < 1e-6)
+		return (false);
+	otp = substract_vec(&pl->pos, &ray->origin);
+	t = dot_scalar_product(&otp, &pl->dir) / denom;
+	if (t < rec->ray_tmin || t > rec->ray_tmax)
+		return (false);
+	rec->t = t;
+	rec->point = ray_at(ray, t);
+	rec->normal = pl->dir;
+	return (true);
+}
+
 bool	hit_sphere(t_ray *ray, t_forms *form, t_hit *rec)
 {
 	t_sp	*sp;
@@ -39,7 +60,6 @@ bool	hit_sphere(t_ray *ray, t_forms *form, t_hit *rec)
 	rec->normal = substract_vec(&rec->point, &sp->pos);
 	return (true);
 }
-
 
 t_hit	nearest_hit(t_ray *ray, t_scene *scene)
 {

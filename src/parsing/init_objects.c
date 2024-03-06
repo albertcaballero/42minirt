@@ -97,13 +97,12 @@ void	init_type_obj(t_objs *obj, char **args, int type)
 		if (ft_splitlen(args) != 4 || init_sphere(&obj->form, args))
 			error_msg("Sphere: invalid arguments");
 		obj->hit = hit_sphere;
-		///obj->hit(params);
 	}
 	else if (type == PL)
 	{
 		if (ft_splitlen(args) != 4 || init_plane(&obj->form, args))
 			error_msg("Plane: invalid arguments");
-		//obj->hit = hit_plane;
+		obj->hit = hit_plane;
 	}
 	else if (type == CY)
 	{

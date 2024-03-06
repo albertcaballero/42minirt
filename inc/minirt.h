@@ -242,5 +242,6 @@ double	get_next_ligth(t_scene *scene, t_point origin, t_hit *rec);
 /* hit.c */
 t_hit	nearest_hit(t_ray *ray, t_scene *scene);
 bool	hit_sphere(t_ray *ray, t_forms *form, t_hit *rec);
+bool	hit_plane(t_ray *ray, t_forms *form, t_hit *rec);
 
 #endif

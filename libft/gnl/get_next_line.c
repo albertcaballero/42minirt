@@ -103,11 +103,9 @@ static char	*reader(int fd, char *cola)
 
 char	*get_next_line(int fd)
 {
-	int			i;
 	char		*mega;
 	static char	*cola;
 
-	i = 0;
 	mega = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
