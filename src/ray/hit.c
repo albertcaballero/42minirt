@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:46:15 by jmarinel          #+#    #+#             */
-/*   Updated: 2024/03/05 16:23:21 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:40:52 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ bool	hit_sphere(t_ray *ray, t_forms *form, t_hit *rec)
 	rec->t = calc.root;
 	rec->point = ray_at(ray, rec->t);
 	rec->normal = substract_vec(&rec->point, &sp->pos);
+	rec->normal = normalize_vec(&rec->normal);
 	return (true);
 }
 
