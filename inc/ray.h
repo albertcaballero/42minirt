@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:14:43 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/28 18:23:19 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:15:40 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ typedef struct s_ray
 
 t_vec	ray_at(t_ray *ray, double t);
 t_ray	new_ray(t_point *origin, t_point *dir);
+
 
 #endif

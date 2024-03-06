@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/29 14:43:08 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:21:16 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,20 @@
 # include <fcntl.h>
 # include <vectors.h>
 # include <ray.h>
+# include <limits.h>
+# include <stdbool.h>
 
 // =================================== DEFINITIONS =============================
 # define WIN_W 800
 # define WIN_H 800
 
 # define CLOSE 17
+
+# define ERROR 1
+# define OK 0
+# define LIMIT_RAD 99999
+# define LIMIT_HEIGHT 99999
+# define LIMIT_VEC 99999
 
 /*========== COLORS ==========*/
 # define BLUE 0x0000FF
@@ -59,38 +67,26 @@ typedef struct s_color
 	int				hex;
 }	t_color;
 
-typedef struct s_hit
-{
-	t_vec	normal;
-	t_point	p;
-	t_color	color;
-	double	t;
-	double	t_max;
-	double	t_min;
-}	t_hit;
 
 /* ==========  OBJECTS  ========== */
 typedef struct s_sphere
 {
-	double	diam;
+	double	rad;
 	t_point	pos;
-	t_color	col;
 }	t_sp;
 
 typedef struct s_plane
 {
-	t_point	pos;
 	t_vec	dir;
-	t_color	col;
+	t_point	pos;
 }	t_pl;
 
 typedef struct s_cylinder
 {
-	double	diam;
+	double	rad;
 	double	height;
 	t_point	pos;
 	t_vec	dir;
-	t_color	col;
 }	t_cy;
 
 /*=============== IDENTIFIERS  ==========*/
@@ -133,15 +129,41 @@ typedef union u_forms
 	t_pl	*pl;
 }	t_forms;
 
+
+
+/*=============== HIT ==========*/
+typedef struct s_hit_calc
+{
+	double				a;
+	double				b;
+	double				c;
+	double				disc;
+	double				root;
+	double				sqrt;
+}						t_hcalc;
+
+typedef struct s_hit
+{
+	struct s_objects	*obj;
+	t_point				point;
+	t_color				color;
+	t_vec				normal;
+	double				t;
+	double				ray_tmin;
+	double				ray_tmax;
+}						t_hit;
+
 typedef struct s_objects
 {
 	t_forms				form;
+	t_color				col;
+	bool				(*hit)(t_ray *, t_forms *, t_hit *);
 	struct s_objects	*next;
 }	t_objs;
 
 typedef struct s_scene
 {
-	t_camera	cam; //*?
+	t_camera	cam;
 	t_objs		*objs;
 	t_ambient	ambient;
 	t_light		*light;
@@ -191,13 +213,13 @@ int		check_identifiers(char *str);
 
 /* INIT_SCENE.C */
 void	init_type(t_scene *scene, char **args, int type);
-void	print_scene(t_scene *scene);
+void	print_scene(t_scene *scene, int type);
 t_vec	parse_vector(char *line);
 t_color	parse_color(char *line);
 
 /* check_numbers.c */
 int		checkrng_int(char *str, int min, int max);
-int		checkrng_double(char *str, double min, double max);
+int		checkrng_dbl(char *str, double min, double max);
 
 /* init_objects.c */
 t_objs	*add_objects(t_objs *objs, char **args, int type);
@@ -217,7 +239,8 @@ t_color	ray_color(t_ray *ray, t_scene *scene);
 /* find_lights.c */
 double	get_next_ligth(t_scene *scene, t_point origin, t_hit *rec);
 
-
-
+/* hit.c */
+t_hit	nearest_hit(t_ray *ray, t_scene *scene);
+bool	hit_sphere(t_ray *ray, t_forms *form, t_hit *rec);
 
 #endif

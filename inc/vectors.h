@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:43:31 by jmarinel          #+#    #+#             */
-/*   Updated: 2024/02/21 17:36:36 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:16:53 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	scalar_div_vec(t_vec *vec, double f);
 t_vec	scalar_mult_vec_ret(t_vec *vec, double f);
 t_vec	scalar_div_vec_ret(t_vec *vec, double f);
 double	length_vec(t_vec *vec);
+double	length_squared(t_vec *vec);
 t_vec	normalize_vec(t_vec *vec);
 double	dot_scalar_product(t_vec *vec1, t_vec *vec2);
 t_vec	cross_product(t_vec *vec1, t_vec *vec2);

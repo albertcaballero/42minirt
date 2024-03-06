@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:29:44 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/16 18:01:31 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:02:48 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	open_map(char *fname, t_scene *scene)
 		free(line);
 		line = get_next_line(fd);
 	}
-	print_scene(scene);
+	print_scene(scene, type);
 	close (fd);
 	return (0);
 }
