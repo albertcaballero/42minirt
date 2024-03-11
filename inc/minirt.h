@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/05 16:21:16 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:31:57 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,8 @@ int		check_identifiers(char *str);
 
 /* INIT_SCENE.C */
 void	init_type(t_scene *scene, char **args, int type);
-void	print_scene(t_scene *scene, int type);
+void	print_scene(t_scene *scene);
+void	print_objs(t_objs *objs, int type);
 t_vec	parse_vector(char *line);
 t_color	parse_color(char *line);
 

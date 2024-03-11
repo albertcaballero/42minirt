@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:29:44 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/21 18:02:48 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:41:55 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	open_map(char *fname, t_scene *scene)
 		free(line);
 		line = get_next_line(fd);
 	}
-	print_scene(scene, type);
+	print_scene(scene);
 	close (fd);
 	return (0);
 }

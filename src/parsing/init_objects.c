@@ -6,32 +6,12 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:17:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/05 16:03:29 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:44:55 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_objs	*add_objects(t_objs *objs, char **args, int type)
-{
-	t_objs	*tmp;
-
-	tmp = objs;
-	objs = ft_listlast_obj(objs);
-	if (objs == NULL)
-	{
-		objs = malloc(sizeof(t_objs));
-		init_type_obj(objs, args, type);
-		objs->next = NULL;
-		return (objs);
-	}
-	objs->next = malloc(sizeof(t_objs));
-	objs = objs->next;
-	init_type_obj(objs, args, type);
-	objs->next = NULL;
-	objs = tmp;
-	return (objs);
-}
 
 int	init_sphere(t_forms *form, char **args)
 {
@@ -91,27 +71,51 @@ int	init_cyl(t_forms *form, char **args)
 
 void	init_type_obj(t_objs *obj, char **args, int type)
 {
+	//fprintf(stderr, "split len is: -- %i -- \n", ft_splitlen(args) - 1);
 	obj->col = parse_color(args[ft_splitlen(args) - 1]);
 	if (type == SP)
 	{
 		if (ft_splitlen(args) != 4 || init_sphere(&obj->form, args))
 			error_msg("Sphere: invalid arguments");
+		print_objs(obj, type);
 		obj->hit = hit_sphere;
 	}
 	else if (type == PL)
 	{
 		if (ft_splitlen(args) != 4 || init_plane(&obj->form, args))
 			error_msg("Plane: invalid arguments");
+		print_objs(obj, type);
 		obj->hit = hit_plane;
 	}
 	else if (type == CY)
 	{
 		if (ft_splitlen(args) != 6 || init_cyl(&obj->form, args))
 			error_msg("Cylinder: invalid arguments");
+		print_objs(obj, type);
 		//obj->hit = hit_cyl;
 	}
 }
 
+t_objs	*add_objects(t_objs *objs, char **args, int type)
+{
+	t_objs	*tmp;
+
+	tmp = objs;
+	objs = ft_listlast_obj(objs);
+	if (objs == NULL)
+	{
+		objs = malloc(sizeof(t_objs));
+		init_type_obj(objs, args, type);
+		objs->next = NULL;
+		return (objs);
+	}
+	objs->next = malloc(sizeof(t_objs));
+	objs = objs->next;
+	init_type_obj(objs, args, type);
+	objs->next = NULL;
+	objs = tmp;
+	return (objs);
+}
 
 /*DELTE
 color ray_color(const ray& r) {

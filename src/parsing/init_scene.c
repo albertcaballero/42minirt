@@ -6,13 +6,13 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:13:20 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/05 16:22:24 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:43:24 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	print_scene(t_scene *scene, int type)
+void	print_scene(t_scene *scene)
 {
 	dprintf(2, "========= AMBIENT LIGHT =======\n");
 	dprintf(2, "ratio: %f\ncolor: %i,%i,%i\n", scene->ambient.ratio, \
@@ -24,28 +24,34 @@ void	print_scene(t_scene *scene, int type)
 	dprintf(2, "========= LIGHT ===============\n");
 	dprintf(2, "ratio: %f\npos: %f,%f,%f\n", scene->light->ratio, \
 		scene->light->pos.x, scene->light->pos.y, scene->light->pos.z);
+
+}
+
+void	print_objs(t_objs *objs, int type)
+{
 	if (type == SP )
 	{
 		dprintf(2, "========= SPHERE ===============\n");
-		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", scene->objs->form.sp->rad, \
-			scene->objs->form.sp->pos.x, scene->objs->form.sp->pos.y, scene->objs->form.sp->pos.z, \
-			scene->objs->col.r, scene->objs->col.g, scene->objs->col.b);
+		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", objs->form.sp->rad, \
+			objs->form.sp->pos.x, objs->form.sp->pos.y, objs->form.sp->pos.z, \
+			objs->col.r, objs->col.g, objs->col.b);
 	}
 	else if (type == PL )
 	{
 		dprintf(2, "========= PLANE ===============\n");
-		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", scene->objs->form.sp->rad, \
-			scene->objs->form.pl->pos.x, scene->objs->form.pl->pos.y, scene->objs->form.pl->pos.z, \
-			scene->objs->col.r, scene->objs->col.g, scene->objs->col.b);
+		dprintf(2, "pos: %f,%f,%f\ncol: %i,%i,%i\n", \
+			objs->form.pl->pos.x, objs->form.pl->pos.y, objs->form.pl->pos.z, \
+			objs->col.r, objs->col.g, objs->col.b);
 	}
 	else if (type == CY )
 	{
 		dprintf(2, "========= CYLINDER ===============\n");
-		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", scene->objs->form.sp->rad, \
-			scene->objs->form.cy->pos.x, scene->objs->form.cy->pos.y, scene->objs->form.cy->pos.z, \
-			scene->objs->col.r, scene->objs->col.g, scene->objs->col.b);
+		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", objs->form.sp->rad, \
+			objs->form.cy->pos.x, objs->form.cy->pos.y, objs->form.cy->pos.z, \
+			objs->col.r, objs->col.g, objs->col.b);
 	}
 }
+
 
 t_color	parse_color(char *line)
 {
@@ -75,17 +81,10 @@ t_vec	parse_vector(char *line)
 {
 	t_vec	vec;
 	char	**spl;
-	// int		i;
 
 	spl = ft_split(line, ',');
 	if (ft_splitlen(spl) != 3)
 		error_msg("wrong vector count");
-	/*while (i < 3)
-	{
-		if (checkrng_doub(spl[i], -LIMIT_VEC, LIMIT_VEC) == ERROR)
-			error_msg("vector out of range");
-		i++;
-	}*/
 	vec.x = ft_atod(spl[0]);
 	vec.y = ft_atod(spl[1]);
 	vec.z = ft_atod(spl[2]);
