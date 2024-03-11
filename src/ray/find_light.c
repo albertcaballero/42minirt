@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:46:48 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/11 14:41:14 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/11 19:07:21 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ double	get_next_ligth(t_scene *scene, t_point origin, t_hit *rec)
 		light_rec = nearest_hit(&light, scene);
 		if (light_rec.t > 0.0)
 		{
-			printf("%f\n", light_rec.t);
-			return 0.0;
+			// printf("%f\n", light_rec.t);
+			dotprod = -1.0;
 		}
-		dotprod = dot_scalar_product(&rec->normal, &light.dir);
+		else
+			dotprod = dot_scalar_product(&rec->normal, &light.dir);
 		if (dotprod < 0.0)
 			dotprod = 0.0;
 		final = scene->light->ratio * dotprod;
