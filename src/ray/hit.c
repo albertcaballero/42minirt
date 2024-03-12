@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:46:15 by jmarinel          #+#    #+#             */
-/*   Updated: 2024/03/11 19:10:54 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:56:30 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ bool	hit_sphere(t_ray *ray, t_forms *form, t_hit *rec)
 		return (false);
 	calc.sqrt = sqrt(calc.disc);
 	calc.root = (-calc.b - calc.sqrt) / calc.a;
-	if (calc.root < rec->ray_tmin || rec->ray_tmax < calc.root)
+	if (calc.root <= rec->ray_tmin || rec->ray_tmax <= calc.root)
 	{
 		calc.root = (-calc.b + calc.sqrt) / calc.a;
-		if (calc.root < rec->ray_tmin || rec->ray_tmax < calc.root)
+		if (calc.root <= rec->ray_tmin || rec->ray_tmax <= calc.root)
 			return (false);
 	}
 	rec->t = calc.root;

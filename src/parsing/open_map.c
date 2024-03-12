@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:29:44 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/11 15:41:55 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:54:18 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,21 @@ int	check_valid_name(char *fname)
 	return (0);
 }
 
+void	fix_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '\t')
+			line[i] = ' ';
+		if (line[i] == '\n')
+			line[i] = '\0';
+		i++;
+	}
+}
+
 int	open_map(char *fname, t_scene *scene)
 {
 	int		fd;
@@ -45,7 +60,7 @@ int	open_map(char *fname, t_scene *scene)
 		error_msg("Empty file");
 	while (line)
 	{
-		line = ft_strtrim(line, "\n\t ");
+		fix_line(line);
 		if (line && ft_strlen(line) != 0)
 		{
 			split = ft_split(line, ' ');
