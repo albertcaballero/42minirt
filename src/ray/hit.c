@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:46:15 by jmarinel          #+#    #+#             */
-/*   Updated: 2024/03/12 15:56:30 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:49:57 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	hit_plane(t_ray *ray, t_forms *form, t_hit *rec)
 	if (fabs(denom) < 1e-6) //0.0000001
 		return (false);
 	d = dot_scalar_product(&pl->dir, &pl->pos);
-	t = (d - dot_scalar_product(&pl->dir, &ray->origin) / denom);
+	t = (d - dot_scalar_product(&pl->dir, &ray->origin)) / denom;
 	if (t < rec->ray_tmin || t > rec->ray_tmax)
 		return (false);
 	rec->t = t;

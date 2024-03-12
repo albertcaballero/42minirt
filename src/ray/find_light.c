@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_light.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:46:48 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/12 16:12:06 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/12 18:48:28 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,11 @@ double	get_next_ligth(t_scene *scene, t_point point, t_hit *rec)
 		light.dir = normalize_vec(&light.dir);
 
 		inv.origin = point;
-		inv.dir = substract_vec(&inv.origin, &scene->light->pos);
+		inv.dir = substract_vec(&scene->light->pos, &inv.origin);
 		magnitude = length_vec(&inv.dir);
-		scalar_mult_vec(&inv.dir, -1.0);
-		// inv.dir = normalize_vec(&inv.dir);
 		light_rec = nearest_hit(&inv, scene);
-		if (light_rec.t > 0.0) //si se cumple es sombra
-		{
-			// printf("%f and %f\n", light_rec.t, magnitude);
-			// if (magnitude  < light_rec.t + 1e-6)
-			// 	dotprod = dot_scalar_product(&rec->normal, &light.dir);
-			// else
+		if (light_rec.t > 0.0 && light_rec.t + 1e-6 < magnitude) //si se cumple es sombra y se encuentra or delate de la luz
 				dotprod = -1.0;
-		}
 		else
 			dotprod = dot_scalar_product(&rec->normal, &light.dir);
 		if (dotprod < 0.0)
