@@ -15,9 +15,7 @@
 void	*ft_calloc(size_t count, size_t size)
 {
 	char	*arr;
-	int		i;
 
-	i = 0;
 	arr = malloc (count * size);
 	if (!arr)
 		return (NULL);

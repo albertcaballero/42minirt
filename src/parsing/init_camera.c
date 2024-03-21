@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_camera.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:10:02 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/05 16:16:33 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/14 10:29:53 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,23 @@ void	calculate_px00_loc(t_camera *cam, t_vec *vp_up_left)
 
 void	calculate_viewport(t_camera *cam)
 {
+	//direccion camara no puede ser 0, 0 ,0 --> no mira a ningun lado//
+
+
 	t_vec	vp_up_left;
 	t_vec	aux[5];
 	t_vec	tmpaxis;
-	t_vec	axis[3]; //u, v, w
+	t_vec	axis[3]; //0 = u, 1 = v, 2 = w
 
 	cam->focal_len = 1.0;
 	cam->vp_w = 2.0 * tan(deg2rad(cam->fov) / 2) * cam->focal_len;
 	cam->vp_h = cam->vp_w * ((double)WIN_H / (double)WIN_W);
-	cam->center = new_vec(0, 0, 0);
+	cam->center = cam->pos;
 	cam->vup = new_vec(0, 1, 0);
 	axis[2] = cam->dir;
-	// scalar_mult_vec(&axis[2], -1);
+	scalar_mult_vec(&axis[2], -1);
+	if (fabs(dot_scalar_product(&cam->vup, &axis[2])) == 1)
+		axis[2].x += 0.001;
 	tmpaxis = cross_product(&cam->vup, &axis[2]);
 	axis[0] = normalize_vec(&tmpaxis);
 	axis[1] = cross_product(&axis[2], &axis[0]);
