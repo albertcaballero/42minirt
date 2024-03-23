@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 10:42:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/21 16:58:16 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/23 15:26:20 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ t_color	ray_color(t_ray *ray, t_scene *scene)
 {
 	t_hit	rec;
 	double	light;
+	t_color	px_color;
 
 	rec = nearest_hit(ray, scene);
 	if (rec.t > 0)
 	{
-		// rec.obj->col = mix_colors(rec.obj->col, scene->ambient.color, scene->ambient.ratio);
+		px_color = mix_colors(rec.obj->col, scene->ambient.color, scene->ambient.ratio);
 		light = get_next_ligth(scene, ray_at(ray, rec.t), &rec);
-		return (mix_colors(scene->light->color, rec.obj->col, light));
+		return (mix_colors(scene->light->color, px_color, light));
 	}
 	return (mix_colors(scene->ambient.color, new_color(100, 100, 100), 0.4));
 }
-
 
 void	cast_rays(t_mlx *mlx, t_scene *scene)
 {

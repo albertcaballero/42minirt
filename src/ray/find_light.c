@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:46:48 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/21 15:46:37 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/23 15:58:43 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,13 @@ double	get_next_ligth(t_scene *scene, t_point point, t_hit *rec)
 	return (final);
 }
 
-// t_color	add_ambient_light(t_color obj, t_ambient *ambient)
-// {
-	
-// }
+/* shade(ray, point, normal, lights) 
+{
+	result = ambient;
+	for light in lights
+	{
+		if (shadow ray not blocked)
+			result += shading contribution;
+	}
+	return result;
+} */
