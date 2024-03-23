@@ -6,24 +6,28 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 10:42:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/23 15:26:20 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/23 16:49:11 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
+t_color	illuminate(t_scene *scene, t_point point, t_hit *rec);
+
 t_color	ray_color(t_ray *ray, t_scene *scene)
 {
 	t_hit	rec;
-	double	light;
+	// double	light;
 	t_color	px_color;
 
 	rec = nearest_hit(ray, scene);
 	if (rec.t > 0)
 	{
-		px_color = mix_colors(rec.obj->col, scene->ambient.color, scene->ambient.ratio);
-		light = get_next_ligth(scene, ray_at(ray, rec.t), &rec);
-		return (mix_colors(scene->light->color, px_color, light));
+		// light = get_next_ligth(scene, ray_at(ray, rec.t), &rec);
+		// return (mix_colors(scene->light->color, px_color, light));
+		px_color = illuminate(scene, ray_at(ray, rec.t), &rec);
+		return (illuminate(scene, ray_at(ray, rec.t), &rec));
+		return (mix_colors(px_color, rec.obj->col, 1.0));
 	}
 	return (mix_colors(scene->ambient.color, new_color(100, 100, 100), 0.4));
 }
