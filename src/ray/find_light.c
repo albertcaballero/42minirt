@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:46:48 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/25 13:40:29 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/25 16:43:06 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,13 @@ t_color	illuminate(t_scene *scene, t_point point, t_hit *rec)
 	t_hit	light_rec;
 	double	magnitude;
 	t_color	magia;
+	t_light	*lightptr;
 
 	final = mix_colors(scene->ambient.color, rec->obj->col, scene->ambient.ratio);
-	// while (scene->light)
-	// {
-		light.origin = scene->light->pos;
+	lightptr = scene->light;
+	while (lightptr)
+	{
+		light.origin = lightptr->pos;
 		light.dir = substract_vec(&light.origin, &point);
 		magnitude = length_vec(&light.dir);
 
@@ -76,8 +78,8 @@ t_color	illuminate(t_scene *scene, t_point point, t_hit *rec)
 			magia = mix_colors(scene->light->color, rec->obj->col, dotprod * scene->light->ratio);
 			final = add_colors(final, magia);
 		}
-		// scene->light = scene->light->next;
-	// }
+		lightptr = lightptr->next;
+	}
 	return (final);
 }
 
