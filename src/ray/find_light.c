@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:46:48 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/25 16:43:06 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:15:12 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_color	illuminate(t_scene *scene, t_point point, t_hit *rec)
 			dotprod = dot_scalar_product(&rec->normal, &light.dir);
 		if (dotprod > 0.0)
 		{
-			magia = mix_colors(scene->light->color, rec->obj->col, dotprod * scene->light->ratio);
+			magia = mix_colors(lightptr->color, rec->obj->col, dotprod * lightptr->ratio);
 			final = add_colors(final, magia);
 		}
 		lightptr = lightptr->next;
