@@ -6,13 +6,13 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:46:48 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/23 17:39:25 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:40:29 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-double	get_next_ligth(t_scene *scene, t_point point, t_hit *rec)
+/* double	get_next_ligth(t_scene *scene, t_point point, t_hit *rec)
 {
 	t_ray	light;
 	double	dotprod;
@@ -44,7 +44,7 @@ double	get_next_ligth(t_scene *scene, t_point point, t_hit *rec)
 		// scene->light = scene->light->next;
 	// }
 	return (final);
-}
+} */
 
 t_color	illuminate(t_scene *scene, t_point point, t_hit *rec)
 {
@@ -53,8 +53,9 @@ t_color	illuminate(t_scene *scene, t_point point, t_hit *rec)
 	t_color	final;
 	t_hit	light_rec;
 	double	magnitude;
+	t_color	magia;
 
-	final = rec->obj->col;
+	final = mix_colors(scene->ambient.color, rec->obj->col, scene->ambient.ratio);
 	// while (scene->light)
 	// {
 		light.origin = scene->light->pos;
@@ -69,16 +70,14 @@ t_color	illuminate(t_scene *scene, t_point point, t_hit *rec)
 		if (light_rec.t > 0.0 && light_rec.t + 1e-6 < magnitude)
 			dotprod = -1.0;
 		else
-		{
 			dotprod = dot_scalar_product(&rec->normal, &light.dir);
-			if (dotprod > 0.0)
-			{
-				final = mix_colors(final, scene->light->color, dotprod*scene->light->ratio);
-			}
+		if (dotprod > 0.0)
+		{
+			magia = mix_colors(scene->light->color, rec->obj->col, dotprod * scene->light->ratio);
+			final = add_colors(final, magia);
 		}
 		// scene->light = scene->light->next;
 	// }
-	final = mix_colors(scene->ambient.color, final, scene->ambient.ratio);
 	return (final);
 }
 

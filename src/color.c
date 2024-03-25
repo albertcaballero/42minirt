@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:05:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/23 11:37:39 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:35:08 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,23 @@ t_color	mix_colors(t_color col1, t_color col2, double ratio)
 	double	col2b = col2.b/255.9999;
 
 	new = new_color_doub(col1r * col2r * ratio, col1g * col2g * ratio, col1b * col2b * ratio);
+	return (new);
+}
+
+unsigned int ft_clamp(int val1, int max)
+{
+	if (val1 >= max)
+		return (max);
+	return (val1);
+}
+
+t_color	add_colors(t_color col1, t_color col2)
+{
+	t_color			new;
+
+	new.r = ft_clamp(col1.r + col2.r, 255);
+	new.g = ft_clamp(col1.g + col2.g, 255);
+	new.b = ft_clamp(col1.b + col2.b, 255);
+	new.hex = (new.r << 16) + (new.g << 8) + new.b;
 	return (new);
 }

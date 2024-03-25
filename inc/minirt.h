@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/23 11:32:22 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/25 12:27:23 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 t_color	new_color(unsigned char r, unsigned char g, unsigned char b);
 t_color	new_color_doub(double r, double g, double b);
 t_color	mix_colors(t_color col1, t_color col2, double ratio);
+t_color	add_colors(t_color col1, t_color col2);
 
 /* utils.c */
 void	*my_malloc(size_t size);
