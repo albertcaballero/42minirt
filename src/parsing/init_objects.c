@@ -6,12 +6,11 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:17:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 18:05:31 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/27 18:08:11 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
-
 
 int	init_sphere(t_forms *form, char **args)
 {
