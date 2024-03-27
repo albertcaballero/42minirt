@@ -92,7 +92,7 @@ void	init_type_obj(t_objs *obj, char **args, int type)
 		if (ft_splitlen(args) != 6 || init_cyl(&obj->form, args))
 			error_msg("Cylinder: invalid arguments");
 		print_objs(obj, type);
-		//obj->hit = hit_cyl;
+		obj->hit = hit_cyl;
 	}
 }
 

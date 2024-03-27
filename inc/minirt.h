@@ -46,6 +46,11 @@
 # define SPRING 0x5ef38c
 # define FAN 0xa80874
 
+/*========== HIT CYL ==========*/
+# define BODY 0
+# define BOT 1
+# define TOP 2
+
 // ================================= STRUCTURES =============================
 /*  ===== INPUT ========== */
 typedef enum e_scenetypes
@@ -87,7 +92,15 @@ typedef struct s_cylinder
 	double	height;
 	t_point	pos;
 	t_vec	dir;
+	bool	hit[3];
 }	t_cy;
+
+typedef struct s_disk
+{
+	t_point			pos;
+	t_vec			dir;
+	double			rad;
+}	t_disk;
 
 /*=============== IDENTIFIERS  ==========*/
 typedef struct s_ambientLight
@@ -244,5 +257,7 @@ double	get_next_ligth(t_scene *scene, t_point origin, t_hit *rec);
 t_hit	nearest_hit(t_ray *ray, t_scene *scene);
 bool	hit_sphere(t_ray *ray, t_forms *form, t_hit *rec);
 bool	hit_plane(t_ray *ray, t_forms *form, t_hit *rec);
+bool	hit_cyl(t_ray *ray, t_forms *obj, t_hit *rec);
+bool	hit_disk(t_ray *ray, t_disk *disk, t_hit *rec);
 
 #endif

@@ -72,7 +72,7 @@ int	open_map(char *fname, t_scene *scene)
 		free(line);
 		line = get_next_line(fd);
 	}
-	print_scene(scene);
+	//print_scene(scene);
 	close (fd);
 	return (0);
 }

@@ -12,6 +12,31 @@
 
 #include <minirt.h>
 
+bool	hit_disk(t_ray *ray, t_disk *disk, t_hit *rec)
+{
+	double	denom;
+	t_vec	oc;
+	double	t;
+	t_vec	p;
+	t_vec	to_center;
+
+	denom = dot_scalar_product(&disk->dir, &ray->dir);
+	if (fabs(denom) < 1e-6)
+		return (false);
+	oc = substract_vec(&disk->pos, &ray->origin);
+	t = dot_scalar_product(&oc, &disk->dir) / denom;
+	if (t <= rec->ray_tmin || t >= rec->ray_tmax)
+		return (false);
+	p = ray_at(ray, t);
+	to_center = substract_vec(&p, &disk->pos);
+	if (dot_scalar_product(&to_center, &to_center) > disk->rad * disk->rad)
+		return (false);
+	rec->t = t;
+	rec->point = p;
+	rec->normal = scalar_mult_vec_ret(&disk->dir, -1);
+	return (true);
+}
+
 bool	hit_plane(t_ray *ray, t_forms *form, t_hit *rec)
 {
 	t_pl	*pl;
