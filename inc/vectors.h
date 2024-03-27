@@ -36,6 +36,7 @@ double	length_squared(t_vec *vec);
 t_vec	normalize_vec(t_vec *vec);
 double	dot_scalar_product(t_vec *vec1, t_vec *vec2);
 t_vec	cross_product(t_vec *vec1, t_vec *vec2);
+t_vec	unitary_vector(t_vec *vec);
 
 /*========== ANGLES ==========*/
 double	deg2rad(double degrees);

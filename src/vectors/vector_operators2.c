@@ -50,3 +50,8 @@ t_vec	normalize_vec(t_vec *vec)
 	}
 	return (new);
 }
+
+t_vec	unitary_vector(t_vec *vec)
+{
+	return (scalar_div_vec_ret(vec, length_vec(vec)));
+}

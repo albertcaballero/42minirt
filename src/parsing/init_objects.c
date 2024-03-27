@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_objects.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:17:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 16:47:52 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/27 18:14:03 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
-
 
 int	init_sphere(t_forms *form, char **args)
 {
@@ -64,6 +63,7 @@ int	init_cyl(t_forms *form, char **args)
 	form->cy = my_malloc(sizeof(t_cy));
 	form->cy->pos = parse_vector(args[1]);
 	form->cy->dir = parse_vector(args[2]);
+	form->cy->dir = unitary_vector(&form->cy->dir);
 	form->cy->rad = ft_atod(args[3]) / 2.0;
 	form->cy->height = ft_atod(args[4]);
 	return (OK);
@@ -71,7 +71,6 @@ int	init_cyl(t_forms *form, char **args)
 
 void	init_type_obj(t_objs *obj, char **args, int type)
 {
-	//fprintf(stderr, "split len is: -- %i -- \n", ft_splitlen(args) - 1);
 	obj->col = parse_color(args[ft_splitlen(args) - 1]);
 	if (type == SP)
 	{
@@ -92,7 +91,7 @@ void	init_type_obj(t_objs *obj, char **args, int type)
 		if (ft_splitlen(args) != 6 || init_cyl(&obj->form, args))
 			error_msg("Cylinder: invalid arguments", -1);
 		print_objs(obj, type);
-		//obj->hit = hit_cyl;
+		obj->hit = hit_cyl;
 	}
 }
 
@@ -116,17 +115,3 @@ t_objs	*add_objects(t_objs *objs, char **args, int type)
 	objs = tmp;
 	return (objs);
 }
-
-/*DELTE
-color ray_color(const ray& r) {
-    auto t = hit_sphere(point3(0,0,-1), 0.5, r);
-    if (t > 0.0) {
-        vec3 N = unit_vector(r.at(t) - vec3(0,0,-1));
-        return 0.5*color(N.x()+1, N.y()+1, N.z()+1);
-    }
-
-    vec3 unit_direction = unit_vector(r.direction());
-    auto a = 0.5*(unit_direction.y() + 1.0);
-    return (1.0-a)*color(1.0, 1.0, 1.0) + a*color(0.5, 0.7, 1.0);
-}
-*/

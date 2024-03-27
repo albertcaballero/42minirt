@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 16:42:13 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/27 18:14:42 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@
 # define TURQ 0x5DC1B9
 # define SPRING 0x5ef38c
 # define FAN 0xa80874
+
+/*========== HIT CYL ==========*/
+# define BODY 0
+# define BOT 1
+# define TOP 2
 
 // ================================= STRUCTURES =============================
 /*  ===== INPUT ========== */
@@ -102,7 +107,15 @@ typedef struct s_cylinder
 	double	height;
 	t_point	pos;
 	t_vec	dir;
+	bool	hit[3];
 }	t_cy;
+
+typedef struct s_disk
+{
+	t_point			pos;
+	t_vec			dir;
+	double			rad;
+}	t_disk;
 
 /*=============== IDENTIFIERS  ==========*/
 typedef struct s_ambientLight
@@ -264,5 +277,7 @@ t_color	illuminate(t_scene *scene, t_point point, t_hit *rec);
 t_hit	nearest_hit(t_ray *ray, t_scene *scene);
 bool	hit_sphere(t_ray *ray, t_forms *form, t_hit *rec);
 bool	hit_plane(t_ray *ray, t_forms *form, t_hit *rec);
+bool	hit_cyl(t_ray *ray, t_forms *obj, t_hit *rec);
+bool	hit_disk(t_ray *ray, t_disk *disk, t_hit *rec);
 
 #endif
