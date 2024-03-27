@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hit_cyl.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/27 15:35:06 by jmarinel          #+#    #+#             */
+/*   Updated: 2024/03/27 17:25:21 by jmarinel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h> 
 
 t_vec	calculate_normal( t_cy *cyl, t_point point)
@@ -6,7 +18,7 @@ t_vec	calculate_normal( t_cy *cyl, t_point point)
 	t_vec	tmp2;
 	t_vec	normal;
 
-	tmp = substract_vec(&cyl->dir, &point);
+	tmp = substract_vec(&cyl->pos, &point);
 	tmp2 = scalar_mult_vec_ret(&cyl->dir, dot_scalar_product(&tmp, &cyl->dir));
 	normal = substract_vec(&tmp2, &tmp);
 	return (unitary_vector(&normal));
@@ -73,10 +85,12 @@ bool	hit_cyl(t_ray *ray, t_forms *obj, t_hit *rec)
 		rec->ray_tmax = rec->t;
 	disk.pos = ray_at(&axis, obj->cy->height);
 	disk.dir = scalar_mult_vec_ret(&obj->cy->dir, -1);
+	obj->cy->hit[BODY] = hit_body_cylinder(ray, *obj, rec);
+	if (obj->cy->hit[BODY])
+		rec->ray_tmax = rec->t;
 	obj->cy->hit[TOP] = hit_disk(ray, &disk, rec);
 	if (obj->cy->hit[TOP])
 		rec->ray_tmax = rec->t;
-	obj->cy->hit[BODY] = hit_body_cylinder(ray, *obj, rec);
-	return (obj->cy->hit[BOT] || obj->cy->hit[TOP]
-		|| obj->cy->hit[BODY]);
+	return (obj->cy->hit[BOT] || obj->cy->hit[BODY]
+		|| obj->cy->hit[TOP]);
 }

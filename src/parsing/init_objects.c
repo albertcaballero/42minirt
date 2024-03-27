@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:17:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/11 15:44:55 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/27 17:29:58 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,21 @@ int	init_cyl(t_forms *form, char **args)
 	form->cy = my_malloc(sizeof(t_cy));
 	form->cy->pos = parse_vector(args[1]);
 	form->cy->dir = parse_vector(args[2]);
+	form->cy->dir = unitary_vector(&form->cy->dir);
 	form->cy->rad = ft_atod(args[3]) / 2.0;
 	form->cy->height = ft_atod(args[4]);
+	/* void	inti_func_cylinder(t_world *cy)
+{
+	t_ray	ray;
+
+	cy->type.cy->dir = unit_vector(&cy->type.cy->dir);
+	ray.dir = cy->type.cy->dir;
+	ray.orig = cy->type.cy->center;
+	cy->type.cy->center = ray_at(&ray, -(cy->type.cy->height / 2));
+	cy->hit = hit_cylinder;
+	cy->get_position_pointer = get_position_cylinder;
+	cy->get_color = get_color_cylinder;
+}*/
 	return (OK);
 }
 
