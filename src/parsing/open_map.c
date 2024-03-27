@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:29:44 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 12:13:33 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:42:38 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int	check_valid_name(char *fname)
 	i = ft_strlen(fname);
 	i--;
 	if (i < 4)
-		error_msg("Invalid file format (*.rt)");
+		error_msg("Invalid file format (*.rt)", -1);
 	if (fname[i] != 't')
-		error_msg("Invalid file format (*.rt)");
+		error_msg("Invalid file format (*.rt)", -1);
 	if (fname[i - 1] != 'r')
-		error_msg("Invalid file format (*.rt)");
+		error_msg("Invalid file format (*.rt)", -1);
 	if (fname[i - 2] != '.')
-		error_msg("Invalid file format (*.rt)");
+		error_msg("Invalid file format (*.rt)", -1);
 	return (0);
 }
 
@@ -56,10 +56,10 @@ int	open_map(char *fname, t_scene *scene)
 	count_identifiers(0, &counter, INIT);
 	fd = open(fname, O_RDONLY);
 	if (fd < 0)
-		error_msg("Could not open file");
+		error_msg("Could not open file", -1);
 	line = get_next_line(fd);
 	if (line == NULL)
-		error_msg("Empty file");
+		error_msg("Empty file", -1);
 	while (line)
 	{
 		counter.line++;
@@ -67,7 +67,7 @@ int	open_map(char *fname, t_scene *scene)
 		if (line && ft_strlen(line) != 0)
 		{
 			split = ft_split(line, ' ');
-			type = check_identifiers(split[0]);
+			type = check_identifiers(split[0], counter.line);
 			count_identifiers(type, &counter, !INIT);
 			if (type != '#')
 				init_type(scene, split, type);

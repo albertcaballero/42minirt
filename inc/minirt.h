@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 12:16:36 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:42:13 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,7 @@ typedef struct s_mlx
 // =================================== FUNCTIONS =============================
 /*========== MAIN =============*/
 /* ERROR_MNGR.C */
-int		error_msg(char *msg);
+int		error_msg(char *msg, int line);
 
 /* color.c */
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -226,7 +226,7 @@ int		ft_clamp(int val1, int max, int type);
 int		open_map(char *fname, t_scene *scene);
 
 /* parse_lines.c */
-int		check_identifiers(char *str);
+int		check_identifiers(char *str, int line);
 void	count_identifiers(int type, t_parsing *counter, int method);
 void	check_counters(t_parsing *counter);
 

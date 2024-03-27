@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:29 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 10:31:39 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:18:13 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ int	main(int argc, char **argv)
 	t_mlx	mlx;
 
 	if (argc != 2)
-		return (error_msg("invalid argc"));
+		return (error_msg("invalid argc", -1));
 	scene = my_malloc(sizeof(*scene));
 	scene->winsize = WIN_H * WIN_W;
 	scene->asp_ratio = (double)WIN_W / (double)WIN_H;
 	scene->objs = NULL;
 	scene->light = NULL;
 	if (open_map(argv[1], scene) < 0)
-		return (error_msg("invalid scene"));
+		return (error_msg("invalid scene", -1));
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, WIN_W, WIN_H, "MINIRT");
 	mlx.img.img = mlx_new_image(mlx.mlx, WIN_W, WIN_H);

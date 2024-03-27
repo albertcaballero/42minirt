@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:14:00 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 12:14:44 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:52:26 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_lights(t_scene *scene, char **args)
 	t_light	*temp;
 
 	if (ft_splitlen(args) != 4)
-		error_msg("Light: invalid argument count [3]");
+		error_msg("Light: invalid argument count [3]", -1);
 	if (!scene->light)
 	{
 		scene->light = my_malloc(sizeof(t_light));
@@ -31,6 +31,8 @@ void	init_lights(t_scene *scene, char **args)
 		scene->light->next = my_malloc(sizeof(t_light));
 		scene->light = scene->light->next;
 	}
+	if (checkrng_dbl(args[2], 0.0, 1.0))
+		error_msg("Light: ratio out of range [0.0, 1.0]", -1);
 	scene->light->pos = parse_vector(args[1]);
 	scene->light->ratio = ft_atod(args[2]);
 	scene->light->color = parse_color(args[3]);

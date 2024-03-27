@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_objects.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:17:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/11 15:44:55 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:47:52 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,21 @@ void	init_type_obj(t_objs *obj, char **args, int type)
 	if (type == SP)
 	{
 		if (ft_splitlen(args) != 4 || init_sphere(&obj->form, args))
-			error_msg("Sphere: invalid arguments");
+			error_msg("Sphere: invalid arguments", -1);
 		print_objs(obj, type);
 		obj->hit = hit_sphere;
 	}
 	else if (type == PL)
 	{
 		if (ft_splitlen(args) != 4 || init_plane(&obj->form, args))
-			error_msg("Plane: invalid arguments");
+			error_msg("Plane: invalid arguments", -1);
 		print_objs(obj, type);
 		obj->hit = hit_plane;
 	}
 	else if (type == CY)
 	{
 		if (ft_splitlen(args) != 6 || init_cyl(&obj->form, args))
-			error_msg("Cylinder: invalid arguments");
+			error_msg("Cylinder: invalid arguments", -1);
 		print_objs(obj, type);
 		//obj->hit = hit_cyl;
 	}
