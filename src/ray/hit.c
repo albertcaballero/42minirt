@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:46:15 by jmarinel          #+#    #+#             */
-/*   Updated: 2024/03/14 13:04:12 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/27 18:03:31 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ bool	hit_plane(t_ray *ray, t_forms *form, t_hit *rec)
 
 	pl = form->pl;
 	denom = dot_scalar_product(&pl->dir, &ray->dir);
-	if (fabs(denom) < 1e-6) //0.0000001
+	if (fabs(denom) < 1e-6)
 		return (false);
 	d = dot_scalar_product(&pl->dir, &pl->pos);
 	t = (d - dot_scalar_product(&pl->dir, &ray->origin)) / denom;
@@ -81,13 +81,11 @@ bool	hit_sphere(t_ray *ray, t_forms *form, t_hit *rec)
 			return (false);
 	}
 	rec->t = calc.root;
-	//fprintf(stderr, "t hit plane is: %f\n", rec->t);
 	rec->point = ray_at(ray, rec->t);
 	rec->normal = substract_vec(&rec->point, &sp->pos);
 	rec->normal = normalize_vec(&rec->normal);
 	return (true);
 }
-	//scalar_div_vec(&rec->normal, sp->rad);
 
 t_hit	nearest_hit(t_ray *ray, t_scene *scene)
 {
@@ -102,7 +100,6 @@ t_hit	nearest_hit(t_ray *ray, t_scene *scene)
 	{
 		if (obj->hit(ray, &obj->form, &rec) == true)
 		{
-			//fprintf(stderr, "obj col is %d\n", (int)obj->col.r);
 			rec.ray_tmax = rec.t;
 			rec.obj = obj;
 		}

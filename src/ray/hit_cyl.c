@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:35:06 by jmarinel          #+#    #+#             */
-/*   Updated: 2024/03/27 17:25:21 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/27 18:02:34 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,11 @@ bool	hit_body_cylinder(t_ray *ray, t_forms obj, t_hit *rec)
 	t_hcalc	calc;
 
 	oc = substract_vec(&ray->origin, &obj.cy->pos);
-	tmp = scalar_mult_vec_ret(&obj.cy->dir, dot_scalar_product(&ray->dir, &obj.cy->dir));
+	tmp = scalar_mult_vec_ret(&obj.cy->dir, \
+	dot_scalar_product(&ray->dir, &obj.cy->dir));
 	direction_parallel = substract_vec(&ray->dir, &tmp);
-	tmp = scalar_mult_vec_ret(&obj.cy->dir, dot_scalar_product(&oc, &obj.cy->dir));
+	tmp = scalar_mult_vec_ret(&obj.cy->dir, \
+	dot_scalar_product(&oc, &obj.cy->dir));
 	oc_parallel = substract_vec(&oc, &tmp);
 	calc.a = length_squared(&direction_parallel);
 	calc.b = dot_scalar_product(&oc_parallel, &direction_parallel);

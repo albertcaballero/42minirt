@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:17:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 17:29:58 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/27 18:02:55 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,24 +67,11 @@ int	init_cyl(t_forms *form, char **args)
 	form->cy->dir = unitary_vector(&form->cy->dir);
 	form->cy->rad = ft_atod(args[3]) / 2.0;
 	form->cy->height = ft_atod(args[4]);
-	/* void	inti_func_cylinder(t_world *cy)
-{
-	t_ray	ray;
-
-	cy->type.cy->dir = unit_vector(&cy->type.cy->dir);
-	ray.dir = cy->type.cy->dir;
-	ray.orig = cy->type.cy->center;
-	cy->type.cy->center = ray_at(&ray, -(cy->type.cy->height / 2));
-	cy->hit = hit_cylinder;
-	cy->get_position_pointer = get_position_cylinder;
-	cy->get_color = get_color_cylinder;
-}*/
 	return (OK);
 }
 
 void	init_type_obj(t_objs *obj, char **args, int type)
 {
-	//fprintf(stderr, "split len is: -- %i -- \n", ft_splitlen(args) - 1);
 	obj->col = parse_color(args[ft_splitlen(args) - 1]);
 	if (type == SP)
 	{
