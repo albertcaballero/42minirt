@@ -6,11 +6,53 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 16:03:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/16 18:01:37 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:22:27 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+void	check_counters(t_parsing *counter)
+{
+	if (counter->ambicount == 0)
+		error_msg("No ambient light");
+	if (counter->ambicount > 1)
+		error_msg("Too many ambient lights");
+	if (counter->camcount == 0)
+		error_msg("No camera");
+	if (counter->camcount > 1)
+		error_msg("Too many cameras");
+	if (counter->cycount + counter->plcount + counter->spcount == 0)
+		error_msg("No objects in scene");
+	if (counter->cycount + counter->plcount + counter->spcount > 50)
+		error_msg("Too many objects in scene [max 50]");
+}
+
+void	count_identifiers(int type, t_parsing *counter, int method)
+{
+	if (method == INIT)
+	{
+		counter->ambicount = 0;
+		counter->camcount = 0;
+		counter->lightcount = 0;
+		counter->spcount = 0;
+		counter->plcount = 0;
+		counter->cycount = 0;
+		return ;
+	}
+	if (type == AMBI)
+		counter->ambicount++;
+	else if (type == CAM)
+		counter->camcount++;
+	else if (type == LIGHT)
+		counter->lightcount++;
+	else if (type == SP)
+		counter->spcount++;
+	else if (type == PL)
+		counter->plcount++;
+	else if (type == CY)
+		counter->cycount++;
+}
 
 int	check_identifiers(char *str)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:13:20 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/11 15:43:24 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:15:41 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,15 @@ t_color	parse_color(char *line)
 
 	spl = ft_split(line, ',');
 	if (ft_splitlen(spl) != 3)
-		error_msg("wrong color count");
+	{
+		free_split(spl);
+		error_msg("Wrong color count [3]");
+	}
 	i = 0;
 	while (i < 3)
 	{
 		if (checkrng_int(spl[i], 0, 255) == ERROR)
-			error_msg("color out of range");
+			error_msg("Color out of range [0, 255]");
 		i++;
 	}
 	color.r = ft_atoi(spl[0]);
@@ -84,7 +87,10 @@ t_vec	parse_vector(char *line)
 
 	spl = ft_split(line, ',');
 	if (ft_splitlen(spl) != 3)
-		error_msg("wrong vector count");
+	{
+		free_split(spl);
+		error_msg("Wrong vector count [3]");
+	}
 	vec.x = ft_atod(spl[0]);
 	vec.y = ft_atod(spl[1]);
 	vec.z = ft_atod(spl[2]);
@@ -96,15 +102,19 @@ void	init_type(t_scene *scene, char **args, int type)
 {
 	if (type == AMBI)
 	{
-		if (ft_splitlen(args) != 3 || checkrng_dbl(args[1], 0.0, 1.0))
-			error_msg("Ambient light: invalid arguments");
+		if (ft_splitlen(args) != 3)
+			error_msg("Ambient light: invalid argument count [2]");
+		if (checkrng_dbl(args[1], 0.0, 1.0))
+			error_msg("Ambient light: ratio out of range [0.0, 1.0]");
 		scene->ambient.ratio = ft_atod(args[1]);
 		scene->ambient.color = parse_color(args[2]);
 	}
 	else if (type == CAM)
 	{
-		if (ft_splitlen(args) != 4 || checkrng_int(args[3], 1, 179))
-			error_msg("Camera: invalid arguments");
+		if (ft_splitlen(args) != 4)
+			error_msg("Camera: invalid argument count [3]");
+		if (checkrng_int(args[3], 1, 179))
+			error_msg("Camera: FoV out of range [1, 179]");
 		scene->cam.pos = parse_vector(args[1]);
 		scene->cam.dir = parse_vector(args[2]);
 		scene->cam.fov = ft_atoi(args[3]);

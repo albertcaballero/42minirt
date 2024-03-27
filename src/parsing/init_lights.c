@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:14:00 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/24 12:37:39 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:14:44 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_lights(t_scene *scene, char **args)
 	t_light	*temp;
 
 	if (ft_splitlen(args) != 4)
-		error_msg("Light: invalid arguments");
+		error_msg("Light: invalid argument count [3]");
 	if (!scene->light)
 	{
 		scene->light = my_malloc(sizeof(t_light));

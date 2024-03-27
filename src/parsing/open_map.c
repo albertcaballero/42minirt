@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:29:44 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/12 12:54:18 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:13:33 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,29 @@ void	fix_line(char *line)
 
 int	open_map(char *fname, t_scene *scene)
 {
-	int		fd;
-	int		type;
-	char	*line;
-	char	**split;
+	int			fd;
+	int			type;
+	char		*line;
+	char		**split;
+	t_parsing	counter;
 
 	check_valid_name(fname);
+	count_identifiers(0, &counter, INIT);
 	fd = open(fname, O_RDONLY);
 	if (fd < 0)
-		error_msg("Invalid file");
+		error_msg("Could not open file");
 	line = get_next_line(fd);
 	if (line == NULL)
 		error_msg("Empty file");
 	while (line)
 	{
+		counter.line++;
 		fix_line(line);
 		if (line && ft_strlen(line) != 0)
 		{
 			split = ft_split(line, ' ');
 			type = check_identifiers(split[0]);
+			count_identifiers(type, &counter, !INIT);
 			if (type != '#')
 				init_type(scene, split, type);
 			free_split(split);
@@ -72,6 +76,7 @@ int	open_map(char *fname, t_scene *scene)
 		free(line);
 		line = get_next_line(fd);
 	}
+	check_counters(&counter);
 	print_scene(scene);
 	close (fd);
 	return (0);

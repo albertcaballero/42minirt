@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:21:47 by alcaball          #+#    #+#             */
-/*   Updated: 2024/02/21 16:06:34 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:34:03 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,15 @@ t_objs	*ft_listlast_obj(t_objs *lst)
 		lst = lst->next;
 	}
 	return (lst);
+}
+
+int	ft_clamp(int val1, int lim, int type)
+{
+	if (type == MAX && val1 >= lim)
+		return (lim);
+	if (type == MIN && val1 <= lim)
+		return (lim);
+	return (val1);
 }
 
 //mallocs a value and if return is NULL exits program

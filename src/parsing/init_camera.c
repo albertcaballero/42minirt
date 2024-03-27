@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:10:02 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/14 10:29:53 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:43:49 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ void	calculate_px00_loc(t_camera *cam, t_vec *vp_up_left)
 
 void	calculate_viewport(t_camera *cam)
 {
-	//direccion camara no puede ser 0, 0 ,0 --> no mira a ningun lado//
-
-
 	t_vec	vp_up_left;
 	t_vec	aux[5];
 	t_vec	tmpaxis;

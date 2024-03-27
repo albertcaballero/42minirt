@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/25 12:27:23 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:16:36 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # define WIN_H 800
 
 # define CLOSE 17
+# define ESC 53
+# define INIT 1
+# define MIN 1
+# define MAX 2
 
 # define ERROR 1
 # define OK 0
@@ -67,6 +71,17 @@ typedef struct s_color
 	unsigned int	hex;
 }	t_color;
 
+typedef struct s_parse_scene
+{
+	int	line;
+	int	identifier;
+	int	camcount;
+	int	lightcount;
+	int	ambicount;
+	int	spcount;
+	int	cycount;
+	int	plcount;
+}	t_parsing;
 
 /* ==========  OBJECTS  ========== */
 typedef struct s_sphere
@@ -204,6 +219,7 @@ t_color	add_colors(t_color col1, t_color col2);
 void	*my_malloc(size_t size);
 double	ft_atod(char *str);
 t_objs	*ft_listlast_obj(t_objs *lst);
+int		ft_clamp(int val1, int max, int type);
 
 /*========== PARSING ==========*/
 /* open_map.c */
@@ -211,6 +227,8 @@ int		open_map(char *fname, t_scene *scene);
 
 /* parse_lines.c */
 int		check_identifiers(char *str);
+void	count_identifiers(int type, t_parsing *counter, int method);
+void	check_counters(t_parsing *counter);
 
 /* INIT_SCENE.C */
 void	init_type(t_scene *scene, char **args, int type);
@@ -239,7 +257,8 @@ void	cast_rays(t_mlx *mlx, t_scene *scene);
 t_color	ray_color(t_ray *ray, t_scene *scene);
 
 /* find_lights.c */
-double	get_next_ligth(t_scene *scene, t_point origin, t_hit *rec);
+t_color	illuminate(t_scene *scene, t_point point, t_hit *rec);
+
 
 /* hit.c */
 t_hit	nearest_hit(t_ray *ray, t_scene *scene);

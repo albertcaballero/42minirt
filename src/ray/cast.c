@@ -6,13 +6,11 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 10:42:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/25 13:26:10 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:16:32 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
-
-t_color	illuminate(t_scene *scene, t_point point, t_hit *rec);
 
 t_color	ray_color(t_ray *ray, t_scene *scene)
 {
