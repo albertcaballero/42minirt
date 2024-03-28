@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:05:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 13:18:32 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/28 16:40:01 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ t_color	mix_colors(t_color col1, t_color col2, double ratio)
 	dcol2.x = col2.r / 255.9999;
 	dcol2.y = col2.g / 255.9999;
 	dcol2.z = col2.b / 255.9999;
-
 	new = new_color_doub(dcol1.x * dcol2.x * ratio, \
 		dcol1.y * dcol2.y * ratio, dcol1.z * dcol2.z * ratio);
 	return (new);

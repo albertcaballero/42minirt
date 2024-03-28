@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_light.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:46:48 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 13:10:52 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:17:22 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,16 @@ t_color	illuminate(t_scene *scene, t_point point, t_hit *rec)
 	t_color	illum;
 	t_light	*lightptr;
 
-	final = mix_colors(scene->ambient.color, rec->obj->col, scene->ambient.ratio);
+	final = mix_colors(scene->ambient.color, rec->obj->col, \
+		scene->ambient.ratio);
 	lightptr = scene->light;
 	while (lightptr)
 	{
 		dotprod = calculate_light(lightptr->pos, point, scene, rec);
 		if (dotprod > 0.0)
 		{
-			illum = mix_colors(lightptr->color, rec->obj->col, dotprod * lightptr->ratio);
+			illum = mix_colors(lightptr->color, rec->obj->col, \
+				dotprod * lightptr->ratio);
 			final = add_colors(final, illum);
 		}
 		lightptr = lightptr->next;

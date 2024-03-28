@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:13:20 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 16:41:25 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:20:22 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	print_scene(t_scene *scene)
+/* void	print_scene(t_scene *scene)
 {
 	dprintf(2, "========= AMBIENT LIGHT =======\n");
 	dprintf(2, "ratio: %f\ncolor: %i,%i,%i\n", scene->ambient.ratio, \
@@ -24,34 +24,32 @@ void	print_scene(t_scene *scene)
 	dprintf(2, "========= LIGHT ===============\n");
 	dprintf(2, "ratio: %f\npos: %f,%f,%f\n", scene->light->ratio, \
 		scene->light->pos.x, scene->light->pos.y, scene->light->pos.z);
-
 }
 
 void	print_objs(t_objs *objs, int type)
 {
-	if (type == SP )
+	if (type == SP)
 	{
 		dprintf(2, "========= SPHERE ===============\n");
-		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", objs->form.sp->rad, \
-			objs->form.sp->pos.x, objs->form.sp->pos.y, objs->form.sp->pos.z, \
-			objs->col.r, objs->col.g, objs->col.b);
+		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n",\
+			objs->form.sp->rad, objs->form.sp->pos.x, objs->form.sp->pos.y, \
+			objs->form.sp->pos.z, objs->col.r, objs->col.g, objs->col.b);
 	}
-	else if (type == PL )
+	else if (type == PL)
 	{
 		dprintf(2, "========= PLANE ===============\n");
 		dprintf(2, "pos: %f,%f,%f\ncol: %i,%i,%i\n", \
 			objs->form.pl->pos.x, objs->form.pl->pos.y, objs->form.pl->pos.z, \
 			objs->col.r, objs->col.g, objs->col.b);
 	}
-	else if (type == CY )
+	else if (type == CY)
 	{
 		dprintf(2, "========= CYLINDER ===============\n");
-		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", objs->form.sp->rad, \
-			objs->form.cy->pos.x, objs->form.cy->pos.y, objs->form.cy->pos.z, \
-			objs->col.r, objs->col.g, objs->col.b);
+		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", \
+			objs->form.sp->rad, objs->form.cy->pos.x, objs->form.cy->pos.y, \
+			objs->form.cy->pos.z, objs->col.r, objs->col.g, objs->col.b);
 	}
-}
-
+} */
 
 t_color	parse_color(char *line)
 {
@@ -63,13 +61,13 @@ t_color	parse_color(char *line)
 	if (ft_splitlen(spl) != 3)
 	{
 		free_split(spl);
-		error_msg("Wrong color count [3]", -1);
+		error_msg("Wrong color count [3]", -1, NULL);
 	}
 	i = 0;
 	while (i < 3)
 	{
 		if (checkrng_int(spl[i], 0, 255) == ERROR)
-			error_msg("Color out of range [0, 255]", -1);
+			error_msg("Color out of range [0, 255]", -1, NULL);
 		i++;
 	}
 	color.r = ft_atoi(spl[0]);
@@ -80,16 +78,23 @@ t_color	parse_color(char *line)
 	return (color);
 }
 
-t_vec	parse_vector(char *line)
+t_vec	parse_vector(char *line, int type)
 {
 	t_vec	vec;
 	char	**spl;
+	int		i;
 
 	spl = ft_split(line, ',');
 	if (ft_splitlen(spl) != 3)
 	{
 		free_split(spl);
-		error_msg("Wrong vector count [3]", -1);
+		error_msg("Wrong vector count [3]", -1, NULL);
+	}
+	i = 3;
+	while (i--)
+	{
+		if (checkrng_dbl(spl[i], -type, type))
+			error_msg("Vector out of range [-1, 1]", -1, NULL);
 	}
 	vec.x = ft_atod(spl[0]);
 	vec.y = ft_atod(spl[1]);
@@ -98,25 +103,26 @@ t_vec	parse_vector(char *line)
 	return (vec);
 }
 
+
 void	init_type(t_scene *scene, char **args, int type)
 {
 	if (type == AMBI)
 	{
 		if (ft_splitlen(args) != 3)
-			error_msg("Ambient: invalid argument count [2]", -1);
+			error_msg("Ambient: invalid argument count [2]", -1, scene);
 		if (checkrng_dbl(args[1], 0.0, 1.0))
-			error_msg("Ambient: ratio out of range [0.0, 1.0]", -1);
+			error_msg("Ambient: ratio out of range [0.0, 1.0]", -1, scene);
 		scene->ambient.ratio = ft_atod(args[1]);
 		scene->ambient.color = parse_color(args[2]);
 	}
 	else if (type == CAM)
 	{
 		if (ft_splitlen(args) != 4)
-			error_msg("Camera: invalid argument count [3]", -1);
+			error_msg("Camera: invalid argument count [3]", -1, scene);
 		if (checkrng_int(args[3], 1, 179))
-			error_msg("Camera: FoV out of range [1, 179]", -1);
-		scene->cam.pos = parse_vector(args[1]);
-		scene->cam.dir = parse_vector(args[2]);
+			error_msg("Camera: FoV out of range [1, 179]", -1, scene);
+		scene->cam.pos = parse_vector(args[1], POS);
+		scene->cam.dir = parse_vector(args[2], DIR);
 		scene->cam.fov = ft_atoi(args[3]);
 		calculate_viewport(&scene->cam);
 	}

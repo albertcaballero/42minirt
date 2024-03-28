@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_camera.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:10:02 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 14:36:32 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/28 16:50:37 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	calculate_px00_loc(t_camera *cam, t_vec *axisW)
 void	calculate_viewport(t_camera *cam)
 {
 	t_vec	tmpaxis;
-	t_vec	axis[3]; //0 = u, 1 = v, 2 = w
+	t_vec	axis[3];
 
 	cam->focal_len = 1.0;
 	cam->vp_w = 2.0 * tan(deg2rad(cam->fov) / 2) * cam->focal_len;
