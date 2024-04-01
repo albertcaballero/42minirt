@@ -6,11 +6,40 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 10:42:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 14:51:25 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/04/01 17:53:14 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+double	random_number(void)
+{
+	double	val;
+	int		readval;
+
+	readval = rand();
+	if (readval < 0)
+		readval *= -1;
+	val = (double)readval;
+	while (val >= 1)
+		val /= 10;
+	return (val);
+}
+
+t_point	rand_pixel(t_point *deltu, t_point *deltv)
+{
+	t_point	new;
+	t_point	tempx;
+	t_point	tempy;
+	double	factor;
+
+	factor = -0.5 + random_number();
+	tempx = scalar_mult_vec_ret(deltu, factor);
+	factor = -0.5 + random_number();
+	tempy = scalar_mult_vec_ret(deltv, factor);
+	new = add_vec(&tempx, &tempy);
+	return (new);
+}
 
 t_color	ray_color(t_ray *ray, t_scene *scene)
 {
@@ -26,28 +55,33 @@ t_color	ray_color(t_ray *ray, t_scene *scene)
 	return (mix_colors(scene->ambient.color, new_color(100, 100, 100), 0.4));
 }
 
-t_ray	camera_ray(t_scene *scene, int i, int j)
+t_color	camera_ray(t_scene *scene, int i, int j)
 {
 	t_vec	px_position[3];
 	t_point	px_center;
 	t_vec	ray_dir;
+	t_vec	px_samp;
 	t_ray	ray;
 
 	px_position[0] = scalar_mult_vec_ret(&scene->cam.px_dlt_u, i);
 	px_position[1] = scalar_mult_vec_ret(&scene->cam.px_dlt_v, j);
 	px_position[2] = add_vec(&px_position[0], &px_position[1]);
 	px_center = add_vec(&scene->cam.px00_loc, &px_position[2]);
-	ray_dir = substract_vec(&px_center, &scene->cam.center);
+	px_position[0] = rand_pixel(&scene->cam.px_dlt_u, &scene->cam.px_dlt_u);
+	px_samp = add_vec(&px_center, &px_position[0]);
+	ray_dir = substract_vec(&px_samp, &scene->cam.center);
 	ray = new_ray(&scene->cam.center, &ray_dir);
-	return (ray);
+	return (ray_color(&ray, scene));
 }
 
 void	cast_rays(t_mlx *mlx, t_scene *scene)
 {
 	int		i;
 	int		j;
-	t_ray	ray;
+	int		samp;
 	t_color	color;
+	t_point	pt;
+	t_point	pt2;
 
 	j = 0;
 	while (j < WIN_H)
@@ -55,8 +89,16 @@ void	cast_rays(t_mlx *mlx, t_scene *scene)
 		i = 0;
 		while (i < WIN_W)
 		{
-			ray = camera_ray(scene, i, j);
-			color = ray_color(&ray, scene);
+			samp = 0;
+			pt2 = new_vec(0, 0, 0);
+			while (samp < SAMPLES)
+			{
+				color = camera_ray(scene, i, j);
+				pt = color_to_point(color);
+				pt2 = add_vec(&pt, &pt2);
+				samp++;
+			}
+			color = average_color(pt2);
 			my_mlx_pixel_put(&mlx->img, i, j, color.hex);
 			i++;
 		}
