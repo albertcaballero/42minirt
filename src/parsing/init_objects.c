@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:17:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/04/01 13:15:02 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/04/01 17:01:01 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,33 @@ int	init_cyl(t_forms *form, char **args)
 	return (OK);
 }
 
+int	init_pb(t_forms *form, char **args)
+{
+	int		i;
+	char	**split;
+
+	i = 0;
+	split = ft_split(args[2], ',');
+	while (i < 3)
+	{
+		if (checkrng_dbl(split[i], -1, 1) == ERROR)
+			return (ERROR);
+		i++;
+	}
+	free_split(split);
+	if (checkrng_dbl(args[3], 0.01, LIMIT_RAD) == ERROR)
+		return (ERROR);
+	if (checkrng_dbl(args[4], 0.01, LIMIT_HEIGHT) == ERROR)
+		return (ERROR);
+	form->pb = my_malloc(sizeof(t_pb));
+	form->pb->pos = parse_vector(args[1], POS);
+	form->pb->dir = parse_vector(args[2], DIR);
+	//form->pb->dir = unitary_vector(&form->pb->dir);
+	form->pb->rad = ft_atod(args[3]) / 2.0;
+	form->pb->height = ft_atod(args[4]);
+	return (OK);
+}
+
 void	init_type_obj(t_objs *obj, char **args, int type)
 {
 	obj->col = parse_color(args[ft_splitlen(args) - 1]);
@@ -90,25 +117,10 @@ void	init_type_obj(t_objs *obj, char **args, int type)
 			error_msg("Cylinder: invalid arguments", -1, NULL);
 		obj->hit = hit_cyl;
 	}
-}
-
-t_objs	*add_objects(t_objs *objs, char **args, int type)
-{
-	t_objs	*tmp;
-
-	tmp = objs;
-	objs = ft_listlast_obj(objs);
-	if (objs == NULL)
+	else if (type == PB)
 	{
-		objs = malloc(sizeof(t_objs));
-		init_type_obj(objs, args, type);
-		objs->next = NULL;
-		return (objs);
+		if (ft_splitlen(args) != 6 || init_pb(&obj->form, args))
+			error_msg("Paraboloid: invalid arguments", -1, NULL);
+		obj->hit = hit_pb;
 	}
-	objs->next = malloc(sizeof(t_objs));
-	objs = objs->next;
-	init_type_obj(objs, args, type);
-	objs->next = NULL;
-	objs = tmp;
-	return (objs);
 }

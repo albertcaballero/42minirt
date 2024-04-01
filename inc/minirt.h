@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/28 18:16:50 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/04/01 17:53:02 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ typedef enum e_scenetypes
 	SP = 4,
 	CY = 5,
 	PL = 6,
-	CN = 7
+	CN = 7,
+	PB = 8
 }	t_stypes;
 
 typedef struct s_color
@@ -88,6 +89,7 @@ typedef struct s_parse_scene
 	int	spcount;
 	int	cycount;
 	int	plcount;
+	int	pbcount;
 }	t_parsing;
 
 /* ==========  OBJECTS  ========== */
@@ -112,12 +114,33 @@ typedef struct s_cylinder
 	bool	hit[3];
 }	t_cy;
 
+typedef struct s_paraboloid
+{
+	double	rad;
+	double	height;
+	t_point	pos;
+	t_vec	dir;
+	bool	hit[3];
+}	t_pb;
+
+/* 
+typedef struct s_cone
+{
+	t_point3			center;
+	t_point3			apex;
+	t_vec3				dir;
+	double				angle;
+	double				height;
+	bool				hit[2];
+}						t_cone; */
+
 typedef struct s_disk
 {
 	t_point			pos;
 	t_vec			dir;
 	double			rad;
 }	t_disk;
+
 
 /*=============== IDENTIFIERS  ==========*/
 typedef struct s_ambientLight
@@ -157,6 +180,7 @@ typedef union u_forms
 	t_sp	*sp;
 	t_cy	*cy;
 	t_pl	*pl;
+	t_pb	*pb;
 }	t_forms;
 
 
@@ -282,5 +306,6 @@ bool	hit_sphere(t_ray *ray, t_forms *form, t_hit *rec);
 bool	hit_plane(t_ray *ray, t_forms *form, t_hit *rec);
 bool	hit_cyl(t_ray *ray, t_forms *obj, t_hit *rec);
 bool	hit_disk(t_ray *ray, t_disk *disk, t_hit *rec);
+bool	hit_pb(t_ray *ray, t_forms *obj, t_hit *rec);
 
 #endif

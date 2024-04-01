@@ -6,50 +6,11 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:13:20 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/28 18:20:22 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:21:59 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
-
-/* void	print_scene(t_scene *scene)
-{
-	dprintf(2, "========= AMBIENT LIGHT =======\n");
-	dprintf(2, "ratio: %f\ncolor: %i,%i,%i\n", scene->ambient.ratio, \
-		scene->ambient.color.r, scene->ambient.color.g, scene->ambient.color.b);
-	dprintf(2, "========= CAMERA ==============\n");
-	dprintf(2, "fov: %i\npos: %f,%f,%f\nrot:%f,%f,%f\n", scene->cam.fov, \
-		scene->cam.pos.x, scene->cam.pos.y, scene->cam.pos.z, \
-		scene->cam.dir.x, scene->cam.dir.y, scene->cam.dir.z);
-	dprintf(2, "========= LIGHT ===============\n");
-	dprintf(2, "ratio: %f\npos: %f,%f,%f\n", scene->light->ratio, \
-		scene->light->pos.x, scene->light->pos.y, scene->light->pos.z);
-}
-
-void	print_objs(t_objs *objs, int type)
-{
-	if (type == SP)
-	{
-		dprintf(2, "========= SPHERE ===============\n");
-		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n",\
-			objs->form.sp->rad, objs->form.sp->pos.x, objs->form.sp->pos.y, \
-			objs->form.sp->pos.z, objs->col.r, objs->col.g, objs->col.b);
-	}
-	else if (type == PL)
-	{
-		dprintf(2, "========= PLANE ===============\n");
-		dprintf(2, "pos: %f,%f,%f\ncol: %i,%i,%i\n", \
-			objs->form.pl->pos.x, objs->form.pl->pos.y, objs->form.pl->pos.z, \
-			objs->col.r, objs->col.g, objs->col.b);
-	}
-	else if (type == CY)
-	{
-		dprintf(2, "========= CYLINDER ===============\n");
-		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", \
-			objs->form.sp->rad, objs->form.cy->pos.x, objs->form.cy->pos.y, \
-			objs->form.cy->pos.z, objs->col.r, objs->col.g, objs->col.b);
-	}
-} */
 
 t_color	parse_color(char *line)
 {
@@ -103,6 +64,26 @@ t_vec	parse_vector(char *line, int type)
 	return (vec);
 }
 
+t_objs	*add_objects(t_objs *objs, char **args, int type)
+{
+	t_objs	*tmp;
+
+	tmp = objs;
+	objs = ft_listlast_obj(objs);
+	if (objs == NULL)
+	{
+		objs = malloc(sizeof(t_objs));
+		init_type_obj(objs, args, type);
+		objs->next = NULL;
+		return (objs);
+	}
+	objs->next = malloc(sizeof(t_objs));
+	objs = objs->next;
+	init_type_obj(objs, args, type);
+	objs->next = NULL;
+	objs = tmp;
+	return (objs);
+}
 
 void	init_type(t_scene *scene, char **args, int type)
 {
@@ -131,3 +112,44 @@ void	init_type(t_scene *scene, char **args, int type)
 	else
 		scene->objs = add_objects(scene->objs, args, type);
 }
+
+
+
+/* void	print_scene(t_scene *scene)
+{
+	dprintf(2, "========= AMBIENT LIGHT =======\n");
+	dprintf(2, "ratio: %f\ncolor: %i,%i,%i\n", scene->ambient.ratio, \
+		scene->ambient.color.r, scene->ambient.color.g, scene->ambient.color.b);
+	dprintf(2, "========= CAMERA ==============\n");
+	dprintf(2, "fov: %i\npos: %f,%f,%f\nrot:%f,%f,%f\n", scene->cam.fov, \
+		scene->cam.pos.x, scene->cam.pos.y, scene->cam.pos.z, \
+		scene->cam.dir.x, scene->cam.dir.y, scene->cam.dir.z);
+	dprintf(2, "========= LIGHT ===============\n");
+	dprintf(2, "ratio: %f\npos: %f,%f,%f\n", scene->light->ratio, \
+		scene->light->pos.x, scene->light->pos.y, scene->light->pos.z);
+}
+
+void	print_objs(t_objs *objs, int type)
+{
+	if (type == SP)
+	{
+		dprintf(2, "========= SPHERE ===============\n");
+		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n",\
+			objs->form.sp->rad, objs->form.sp->pos.x, objs->form.sp->pos.y, \
+			objs->form.sp->pos.z, objs->col.r, objs->col.g, objs->col.b);
+	}
+	else if (type == PL)
+	{
+		dprintf(2, "========= PLANE ===============\n");
+		dprintf(2, "pos: %f,%f,%f\ncol: %i,%i,%i\n", \
+			objs->form.pl->pos.x, objs->form.pl->pos.y, objs->form.pl->pos.z, \
+			objs->col.r, objs->col.g, objs->col.b);
+	}
+	else if (type == CY)
+	{
+		dprintf(2, "========= CYLINDER ===============\n");
+		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", \
+			objs->form.sp->rad, objs->form.cy->pos.x, objs->form.cy->pos.y, \
+			objs->form.cy->pos.z, objs->col.r, objs->col.g, objs->col.b);
+	}
+} */

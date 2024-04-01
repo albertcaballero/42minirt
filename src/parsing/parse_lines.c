@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 16:03:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/28 17:53:27 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/04/01 15:05:13 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,6 @@ void	check_counters(t_parsing *counter)
 
 void	count_identifiers(int type, t_parsing *counter, int method)
 {
-	if (method == INIT)
-	{
-		counter->line = 0;
-		counter->ambicount = 0;
-		counter->camcount = 0;
-		counter->lightcount = 0;
-		counter->spcount = 0;
-		counter->plcount = 0;
-		counter->cycount = 0;
-		return ;
-	}
 	if (type == AMBI)
 		counter->ambicount++;
 	else if (type == CAM)
@@ -51,6 +40,18 @@ void	count_identifiers(int type, t_parsing *counter, int method)
 		counter->plcount++;
 	else if (type == CY)
 		counter->cycount++;
+	else if (type == PB)
+		counter->pbcount++;
+	if (method != INIT)
+		return ;
+	counter->line = 0;
+	counter->ambicount = 0;
+	counter->camcount = 0;
+	counter->lightcount = 0;
+	counter->spcount = 0;
+	counter->plcount = 0;
+	counter->cycount = 0;
+	counter->pbcount = 0;
 }
 
 int	check_identifiers(char *str, int line)
@@ -71,6 +72,32 @@ int	check_identifiers(char *str, int line)
 		return (PL);
 	if (ft_strncmp(str, "cy", 3) == 0)
 		return (CY);
-	error_msg("Unrecognized identifier (A, C, L, sp, cy, pl)", line, NULL);
+	if (ft_strncmp(str, "pb", 3) == 0)
+		return (PB);
+	error_msg("Unrecognized identifier (A, C, L, sp, cy, pl, pb)", line, NULL);
 	return (0);
 }
+/* 
+
+bool	hit_cylinder(const t_ray *ray, t_objects obj, t_hit *rec)
+{
+	t_disk	disk;
+	t_ray	displace;
+
+	displace.orig = obj.cy->center;
+	displace.dir = obj.cy->dir;
+	disk.center = obj.cy->center;
+	disk.dir = obj.cy->dir;
+	disk.radius = obj.cy->radius;
+	obj.cy->hit[BOT] = hit_disk(ray, &disk, rec);
+	if (obj.cy->hit[BOT])
+		rec->ray_tmax = rec->t;
+	disk.center = ray_at(&displace, obj.cy->height);
+	disk.dir = product_vec3_r(&obj.cy->dir, -1);
+	obj.cy->hit[TOP] = hit_disk(ray, &disk, rec);
+	if (obj.cy->hit[TOP])
+		rec->ray_tmax = rec->t;
+	obj.cy->hit[BODY] = hit_body_cylinder(ray, obj, rec);
+	return (obj.cy->hit[BOT] || obj.cy->hit[TOP]
+		|| obj.cy->hit[BODY]);
+} */
