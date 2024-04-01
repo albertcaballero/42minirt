@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:17:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 18:14:03 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:15:45 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	init_sphere(t_forms *form, char **args)
 {
-	if (checkrng_dbl(args[2], -LIMIT_RAD, LIMIT_RAD) == ERROR)
+	if (checkrng_dbl(args[2], 0.01, LIMIT_RAD) == ERROR)
 		return (ERROR);
 	form->sp = my_malloc(sizeof(t_sp));
-	form->sp->pos = parse_vector(args[1]);
+	form->sp->pos = parse_vector(args[1], POS);
 	form->sp->rad = ft_atod(args[2]) / 2.0;
 	return (OK);
 }
@@ -37,8 +37,8 @@ int	init_plane(t_forms *form, char **args)
 	}
 	free_split(split);
 	form->pl = my_malloc(sizeof(t_pl));
-	form->pl->pos = parse_vector(args[1]);
-	form->pl->dir = parse_vector(args[2]);
+	form->pl->pos = parse_vector(args[1], POS);
+	form->pl->dir = parse_vector(args[2], DIR);
 	return (OK);
 }
 
@@ -61,8 +61,8 @@ int	init_cyl(t_forms *form, char **args)
 	if (checkrng_dbl(args[4], -LIMIT_HEIGHT, LIMIT_HEIGHT) == ERROR)
 		return (ERROR);
 	form->cy = my_malloc(sizeof(t_cy));
-	form->cy->pos = parse_vector(args[1]);
-	form->cy->dir = parse_vector(args[2]);
+	form->cy->pos = parse_vector(args[1], POS);
+	form->cy->dir = parse_vector(args[2], DIR);
 	form->cy->dir = unitary_vector(&form->cy->dir);
 	form->cy->rad = ft_atod(args[3]) / 2.0;
 	form->cy->height = ft_atod(args[4]);
@@ -75,22 +75,19 @@ void	init_type_obj(t_objs *obj, char **args, int type)
 	if (type == SP)
 	{
 		if (ft_splitlen(args) != 4 || init_sphere(&obj->form, args))
-			error_msg("Sphere: invalid arguments", -1);
-		print_objs(obj, type);
+			error_msg("Sphere: invalid arguments", -1, NULL);
 		obj->hit = hit_sphere;
 	}
 	else if (type == PL)
 	{
 		if (ft_splitlen(args) != 4 || init_plane(&obj->form, args))
-			error_msg("Plane: invalid arguments", -1);
-		print_objs(obj, type);
+			error_msg("Plane: invalid arguments", -1, NULL);
 		obj->hit = hit_plane;
 	}
 	else if (type == CY)
 	{
 		if (ft_splitlen(args) != 6 || init_cyl(&obj->form, args))
-			error_msg("Cylinder: invalid arguments", -1);
-		print_objs(obj, type);
+			error_msg("Cylinder: invalid arguments", -1, NULL);
 		obj->hit = hit_cyl;
 	}
 }

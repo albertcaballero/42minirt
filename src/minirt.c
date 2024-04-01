@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:29 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 16:18:13 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:48:30 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	mlx_recalc_point(int button, int x, int y, t_scene *scene) //delete
+/* int	mlx_recalc_point(int button, int x, int y, t_scene *scene) //delete
 {
 	t_ray	ray;
 	t_point	px_center;
@@ -32,8 +32,7 @@ int	mlx_recalc_point(int button, int x, int y, t_scene *scene) //delete
 	color = ray_color(&ray, scene);
 	printf("Color %i, %i, %i\n", color.r, color.g, color.b);
 	return (0);
-}
-
+} */
 
 int	close_program(t_mlx *mlx)
 {
@@ -51,27 +50,25 @@ int	get_key(int key, t_mlx *mlx)
 
 int	main(int argc, char **argv)
 {
-	t_scene	*scene;
+	t_scene	scene;
 	t_mlx	mlx;
 
 	if (argc != 2)
-		return (error_msg("invalid argc", -1));
-	scene = my_malloc(sizeof(*scene));
-	scene->winsize = WIN_H * WIN_W;
-	scene->asp_ratio = (double)WIN_W / (double)WIN_H;
-	scene->objs = NULL;
-	scene->light = NULL;
-	if (open_map(argv[1], scene) < 0)
-		return (error_msg("invalid scene", -1));
+		return (error_msg("invalid argc", -1, NULL));
+	scene.winsize = WIN_H * WIN_W;
+	scene.asp_ratio = (double)WIN_W / (double)WIN_H;
+	scene.objs = NULL;
+	scene.light = NULL;
+	open_map(argv[1], &scene);
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, WIN_W, WIN_H, "MINIRT");
 	mlx.img.img = mlx_new_image(mlx.mlx, WIN_W, WIN_H);
 	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &mlx.img.bpp, \
 		&mlx.img.line_length, &mlx.img.endian);
-	mlx_mouse_hook(mlx.win, mlx_recalc_point, scene);
 	mlx_key_hook(mlx.win, get_key, (&mlx));
-	cast_rays(&mlx, scene);
+	cast_rays(&mlx, &scene);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img.img, 0, 0);
 	mlx_hook(mlx.win, CLOSE, 0, close_program, (&mlx));
 	mlx_loop(mlx.mlx);
 }
+	/* mlx_mouse_hook(mlx.win, mlx_recalc_point, scene);*/

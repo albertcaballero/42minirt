@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_lines.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 16:03:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 16:56:17 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:53:27 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void	check_counters(t_parsing *counter)
 {
 	if (counter->ambicount == 0)
-		error_msg("No ambient light", -1);
+		error_msg("No ambient light", -1, NULL);
 	if (counter->ambicount > 1)
-		error_msg("Too many ambient lights", -1);
+		error_msg("Too many ambient lights", -1, NULL);
 	if (counter->camcount == 0)
-		error_msg("No camera", -1);
+		error_msg("No camera", -1, NULL);
 	if (counter->camcount > 1)
-		error_msg("Too many cameras", -1);
+		error_msg("Too many cameras", -1, NULL);
 	if (counter->cycount + counter->plcount + counter->spcount > 50)
-		error_msg("Too many objects in scene [max 50]", -1);
+		error_msg("Too many objects in scene [max 50]", -1, NULL);
 }
 
 void	count_identifiers(int type, t_parsing *counter, int method)
@@ -71,6 +71,6 @@ int	check_identifiers(char *str, int line)
 		return (PL);
 	if (ft_strncmp(str, "cy", 3) == 0)
 		return (CY);
-	error_msg("Unrecognized identifier (A, C, L, sp, cy, pl)", line);
+	error_msg("Unrecognized identifier (A, C, L, sp, cy, pl)", line, NULL);
 	return (0);
 }

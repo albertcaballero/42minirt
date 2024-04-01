@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 18:14:42 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:16:50 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define INIT 1
 # define MIN 1
 # define MAX 2
+# define DIR 1.0
+# define POS 10000.0
 
 # define ERROR 1
 # define OK 0
@@ -219,7 +221,8 @@ typedef struct s_mlx
 // =================================== FUNCTIONS =============================
 /*========== MAIN =============*/
 /* ERROR_MNGR.C */
-int		error_msg(char *msg, int line);
+int		error_msg(char *msg, int line, t_scene *scene);
+void	free_all(t_scene *scene);
 
 /* color.c */
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -247,7 +250,7 @@ void	check_counters(t_parsing *counter);
 void	init_type(t_scene *scene, char **args, int type);
 void	print_scene(t_scene *scene);
 void	print_objs(t_objs *objs, int type);
-t_vec	parse_vector(char *line);
+t_vec	parse_vector(char *line, int type);
 t_color	parse_color(char *line);
 
 /* check_numbers.c */
