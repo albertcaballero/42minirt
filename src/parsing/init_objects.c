@@ -69,7 +69,7 @@ int	init_cyl(t_forms *form, char **args)
 	return (OK);
 }
 
-int	init_pb(t_forms *form, char **args)
+int	init_pb(t_forms *form, char **args) //check how many args needed
 {
 	int		i;
 	char	**split;
@@ -85,14 +85,14 @@ int	init_pb(t_forms *form, char **args)
 	free_split(split);
 	if (checkrng_dbl(args[3], 0.01, LIMIT_RAD) == ERROR)
 		return (ERROR);
-	if (checkrng_dbl(args[4], 0.01, LIMIT_HEIGHT) == ERROR)
-		return (ERROR);
+	/* if (checkrng_dbl(args[4], 0.01, LIMIT_HEIGHT) == ERROR)
+		return (ERROR); */
 	form->pb = my_malloc(sizeof(t_pb));
 	form->pb->pos = parse_vector(args[1], POS);
 	form->pb->dir = parse_vector(args[2], DIR);
-	//form->pb->dir = unitary_vector(&form->pb->dir);
+	form->pb->dir = unitary_vector(&form->pb->dir);
 	form->pb->rad = ft_atod(args[3]) / 2.0;
-	form->pb->height = ft_atod(args[4]);
+	//form->pb->height = ft_atod(args[4]);
 	return (OK);
 }
 
@@ -119,7 +119,7 @@ void	init_type_obj(t_objs *obj, char **args, int type)
 	}
 	else if (type == PB)
 	{
-		if (ft_splitlen(args) != 6 || init_pb(&obj->form, args))
+		if (ft_splitlen(args) != 5 || init_pb(&obj->form, args))
 			error_msg("Paraboloid: invalid arguments", -1, NULL);
 		obj->hit = hit_pb;
 	}

@@ -114,25 +114,27 @@ typedef struct s_cylinder
 	bool	hit[3];
 }	t_cy;
 
+typedef struct s_decisions
+{
+	double	t1;
+	double	t2;
+}	t_decisions;
+
+typedef struct s_coeff
+{
+	double	k1;
+	double	k2;
+	double	k3;
+}	t_coeff;
+
 typedef struct s_paraboloid
 {
-	double	rad;
-	double	height;
-	t_point	pos;
-	t_vec	dir;
-	bool	hit[3];
+	t_vec		pos;
+	t_vec		dir;
+	double		rad;
+	//int			ind;
+	bool		hit[3];
 }	t_pb;
-
-/* 
-typedef struct s_cone
-{
-	t_point3			center;
-	t_point3			apex;
-	t_vec3				dir;
-	double				angle;
-	double				height;
-	bool				hit[2];
-}						t_cone; */
 
 typedef struct s_disk
 {
