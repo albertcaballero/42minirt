@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:17:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/28 18:15:45 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/04/01 13:15:02 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int	init_cyl(t_forms *form, char **args)
 		i++;
 	}
 	free_split(split);
-	if (checkrng_dbl(args[3], -LIMIT_RAD, LIMIT_RAD) == ERROR)
+	if (checkrng_dbl(args[3], 0.01, LIMIT_RAD) == ERROR)
 		return (ERROR);
-	if (checkrng_dbl(args[4], -LIMIT_HEIGHT, LIMIT_HEIGHT) == ERROR)
+	if (checkrng_dbl(args[4], 0.01, LIMIT_HEIGHT) == ERROR)
 		return (ERROR);
 	form->cy = my_malloc(sizeof(t_cy));
 	form->cy->pos = parse_vector(args[1], POS);
