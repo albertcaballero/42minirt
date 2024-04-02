@@ -24,20 +24,20 @@ t_vec	calculate_normal_pb( t_pb *pb, t_point point)
 	return (unitary_vector(&normal));
 }
 
-t_decisions	solving_quadratic_equation(t_coeff coeff)
+t_decisions	solving_quadratic_equation(t_hcalc calc)
 {
 	t_decisions	decision;
 	double		discriminant;
 
-	discriminant = coeff.k2 * coeff.k2 - 4 * coeff.k1 * coeff.k3;
+	discriminant = calc.b * calc.b - 4 * calc.a * calc.c;
 	if (discriminant < 0)
 	{
 		decision.t1 = INT_MAX;
 		decision.t2 = INT_MAX;
 		return (decision);
 	}
-	decision.t1 = (-coeff.k2 + sqrt(discriminant)) / (2 * coeff.k1);
-	decision.t2 = (-coeff.k2 - sqrt(discriminant)) / (2 * coeff.k1);
+	decision.t1 = (-calc.b + sqrt(discriminant)) / (2 * calc.a);
+	decision.t2 = (-calc.b - sqrt(discriminant)) / (2 * calc.a);
 	return (decision);
 }
 
@@ -45,19 +45,20 @@ t_decisions	intersect_ray_paraboloid(t_forms obj,
 										t_ray *ray)
 {
 	t_decisions	decision;
-	t_coeff		coeff;
+	t_hcalc		calc;
 	t_vec		oc;
 
 	oc = substract_vec(&ray->origin, &obj.pb->pos);
-	coeff.k1 = dot_scalar_product(&ray->dir, &ray->dir) - pow(dot_scalar_product(&ray->dir, &obj.pb->dir), 2);
-	coeff.k2 = 2 * (dot_scalar_product(&oc, &ray->dir) - dot_scalar_product(&ray->dir, &obj.pb->dir)
+	/* - - - */
+	calc.a = dot_scalar_product(&ray->dir, &ray->dir) - pow(dot_scalar_product(&ray->dir, &obj.pb->dir), 2);
+	calc.b = 2 * (dot_scalar_product(&oc, &ray->dir) - dot_scalar_product(&ray->dir, &obj.pb->dir)
 			* (dot_scalar_product(&oc, &obj.pb->dir) + 2
 				* obj.pb->rad));
-	coeff.k3 = dot_scalar_product(&oc, &oc)
+	calc.c = dot_scalar_product(&oc, &oc)
 		- dot_scalar_product(&oc, &obj.pb->dir)
 		* (dot_scalar_product(&oc, &obj.pb->dir) + 4
 			* obj.pb->rad);
-	decision = solving_quadratic_equation(coeff);
+	decision = solving_quadratic_equation(calc);
 	return (decision);
 }
 

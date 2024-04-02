@@ -23,7 +23,7 @@
 # include <stdbool.h>
 
 // =================================== DEFINITIONS =============================
-# define WIN_W 800
+# define WIN_W 1200
 # define WIN_H 800
 
 # define CLOSE 17
@@ -120,20 +120,11 @@ typedef struct s_decisions
 	double	t2;
 }	t_decisions;
 
-typedef struct s_coeff
-{
-	double	k1;
-	double	k2;
-	double	k3;
-}	t_coeff;
-
 typedef struct s_paraboloid
 {
 	t_vec		pos;
 	t_vec		dir;
 	double		rad;
-	//int			ind;
-	bool		hit[3];
 }	t_pb;
 
 typedef struct s_disk

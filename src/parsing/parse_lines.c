@@ -22,7 +22,7 @@ void	check_counters(t_parsing *counter)
 		error_msg("No camera", -1, NULL);
 	if (counter->camcount > 1)
 		error_msg("Too many cameras", -1, NULL);
-	if (counter->cycount + counter->plcount + counter->spcount > 50)
+	if (counter->cycount + counter->plcount + counter->spcount + counter->pbcount > 50)
 		error_msg("Too many objects in scene [max 50]", -1, NULL);
 }
 
@@ -42,16 +42,17 @@ void	count_identifiers(int type, t_parsing *counter, int method)
 		counter->cycount++;
 	else if (type == PB)
 		counter->pbcount++;
-	if (method != INIT)
-		return ;
-	counter->line = 0;
-	counter->ambicount = 0;
-	counter->camcount = 0;
-	counter->lightcount = 0;
-	counter->spcount = 0;
-	counter->plcount = 0;
-	counter->cycount = 0;
-	counter->pbcount = 0;
+	else if (method == INIT)
+	{
+		counter->line = 0;
+		counter->ambicount = 0;
+		counter->camcount = 0;
+		counter->lightcount = 0;
+		counter->spcount = 0;
+		counter->plcount = 0;
+		counter->cycount = 0;
+		counter->pbcount = 0;
+	}
 }
 
 int	check_identifiers(char *str, int line)

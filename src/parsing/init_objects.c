@@ -69,7 +69,7 @@ int	init_cyl(t_forms *form, char **args)
 	return (OK);
 }
 
-int	init_pb(t_forms *form, char **args) //check how many args needed
+int	init_pb(t_forms *form, char **args) 
 {
 	int		i;
 	char	**split;
@@ -83,16 +83,13 @@ int	init_pb(t_forms *form, char **args) //check how many args needed
 		i++;
 	}
 	free_split(split);
-	if (checkrng_dbl(args[3], 0.01, LIMIT_RAD) == ERROR)
+	if (checkrng_dbl(args[3], -0.2, 0.2) == ERROR)
 		return (ERROR);
-	/* if (checkrng_dbl(args[4], 0.01, LIMIT_HEIGHT) == ERROR)
-		return (ERROR); */
 	form->pb = my_malloc(sizeof(t_pb));
 	form->pb->pos = parse_vector(args[1], POS);
 	form->pb->dir = parse_vector(args[2], DIR);
 	form->pb->dir = unitary_vector(&form->pb->dir);
 	form->pb->rad = ft_atod(args[3]) / 2.0;
-	//form->pb->height = ft_atod(args[4]);
 	return (OK);
 }
 
