@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/04/03 15:36:48 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:30:59 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define MAX 2
 # define DIR 1.0
 # define POS 10000.0
+# define SAMPLES 1
 
 # define ERROR 1
 # define OK 0
@@ -248,6 +249,9 @@ t_color	new_color(unsigned char r, unsigned char g, unsigned char b);
 t_color	new_color_doub(double r, double g, double b);
 t_color	mix_colors(t_color col1, t_color col2, double ratio);
 t_color	add_colors(t_color col1, t_color col2);
+
+int		average_color(t_vec color);
+t_vec	color_to_point(t_color col1);
 
 /* utils.c */
 void	*my_malloc(size_t size);

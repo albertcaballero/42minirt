@@ -19,7 +19,7 @@ SRC_PARS = parsing/open_map.c parsing/check_numbers.c parsing/init_scene.c parsi
 	parsing/init_lights.c
 SRC_RAY = ray/ray.c ray/cast.c ray/hit.c ray/hit_cyl.c ray/find_light.c ray/hit_pb.c
 SRC_VECTORS = vectors/vector_operators.c vectors/vector_operators2.c vectors/angles.c vectors/vector_operators3.c
-SRC_MAIN = minirt.c error_mngr.c utils.c color.c
+SRC_MAIN = minirt.c error_mngr.c utils.c color.c color_utils.c
 SOURCES = $(SRC_MAIN) $(SRC_PARS) $(SRC_RAY) $(SRC_VECTORS)
 SRC = $(addprefix src/,$(SOURCES))
 
