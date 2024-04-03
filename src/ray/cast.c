@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 10:42:07 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/27 14:51:25 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:58:27 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_color	ray_color(t_ray *ray, t_scene *scene)
 	t_color	px_color;
 
 	rec = nearest_hit(ray, scene);
+	//print_objs(rec.obj);
 	if (rec.t > 0)
 	{
 		px_color = illuminate(scene, ray_at(ray, rec.t), &rec);

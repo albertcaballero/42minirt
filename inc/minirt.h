@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/04/01 17:53:02 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:36:48 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ typedef struct s_objects
 	t_forms				form;
 	t_color				col;
 	bool				(*hit)(t_ray *, t_forms *, t_hit *);
+	int					type;
 	struct s_objects	*next;
 }	t_objs;
 
@@ -266,7 +267,7 @@ void	check_counters(t_parsing *counter);
 /* INIT_SCENE.C */
 void	init_type(t_scene *scene, char **args, int type);
 void	print_scene(t_scene *scene);
-void	print_objs(t_objs *objs, int type);
+void	print_objs(t_objs *objs);
 t_vec	parse_vector(char *line, int type);
 t_color	parse_color(char *line);
 

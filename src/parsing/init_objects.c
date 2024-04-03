@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:17:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/04/01 17:01:01 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:40:19 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	init_pb(t_forms *form, char **args)
 
 void	init_type_obj(t_objs *obj, char **args, int type)
 {
+	obj->type = type;
 	obj->col = parse_color(args[ft_splitlen(args) - 1]);
 	if (type == SP)
 	{

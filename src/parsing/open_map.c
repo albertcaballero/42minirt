@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:29:44 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/28 17:53:00 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:43:33 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,36 @@ int	open_map(char *fname, t_scene *scene)
 	check_counters(&counter);
 	close (fd);
 	return (0);
+}
+
+void	print_objs(t_objs *objs)
+{
+	if (objs->type == SP)
+	{
+		dprintf(2, "========= SPHERE ===============\n");
+		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n",\
+			objs->form.sp->rad, objs->form.sp->pos.x, objs->form.sp->pos.y, \
+			objs->form.sp->pos.z, objs->col.r, objs->col.g, objs->col.b);
+	}
+	else if (objs->type == PL)
+	{
+		dprintf(2, "========= PLANE ===============\n");
+		dprintf(2, "pos: %f,%f,%f\ncol: %i,%i,%i\n", \
+			objs->form.pl->pos.x, objs->form.pl->pos.y, objs->form.pl->pos.z, \
+			objs->col.r, objs->col.g, objs->col.b);
+	}
+	else if (objs->type == CY)
+	{
+		dprintf(2, "========= CYLINDER ===============\n");
+		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", \
+			objs->form.cy->rad, objs->form.cy->pos.x, objs->form.cy->pos.y, \
+			objs->form.cy->pos.z, objs->col.r, objs->col.g, objs->col.b);
+	}
+	else if (objs->type == PB)
+	{
+		dprintf(2, "========= PARABOLOID ===============\n");
+		dprintf(2, "rad: %f\npos: %f,%f,%f\ncol: %i,%i,%i\n", \
+			objs->form.pb->rad, objs->form.pb->pos.x, objs->form.pb->pos.y, \
+			objs->form.pb->pos.z, objs->col.r, objs->col.g, objs->col.b);
+	}
 }
