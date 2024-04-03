@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/04/01 17:21:13 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:24:27 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define MAX 2
 # define DIR 1.0
 # define POS 10000.0
-# define SAMPLES 30
+# define SAMPLES 1
 
 # define ERROR 1
 # define OK 0
@@ -232,7 +232,7 @@ t_color	new_color_doub(double r, double g, double b);
 t_color	mix_colors(t_color col1, t_color col2, double ratio);
 t_color	add_colors(t_color col1, t_color col2);
 
-t_color	average_color(t_vec color);
+int		average_color(t_vec color);
 t_vec	color_to_point(t_color col1);
 
 /* utils.c */

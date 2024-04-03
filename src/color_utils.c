@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 17:20:00 by alcaball          #+#    #+#             */
-/*   Updated: 2024/04/01 17:20:45 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:24:36 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ t_vec	color_to_point(t_color col1)
 	return (dcol1);
 }
 
-t_color average_color(t_vec color)
+int	average_color(t_vec color)
 {
 	t_point	dnew;
 	double	ratio;
+	t_color	coli;
 
 	ratio = 1.0 / (double)SAMPLES;
 
@@ -35,5 +36,6 @@ t_color average_color(t_vec color)
 	dnew.y *= ratio;
 	dnew.z = color.z;
 	dnew.z *= ratio;
-	return (new_color_doub(dnew.x, dnew.y, dnew.z));
+	coli = new_color_doub(dnew.x, dnew.y, dnew.z);
+	return (coli.hex);
 }
