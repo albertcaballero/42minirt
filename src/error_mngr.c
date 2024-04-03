@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:24:41 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/28 17:49:05 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:29:27 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,3 @@ void	free_all(t_scene *scene)
 		scene->objs = tmp_o;
 	}
 }
-

@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/04/03 17:30:59 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:55:54 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <stdbool.h>
 
 // =================================== DEFINITIONS =============================
-# define WIN_W 1200
-# define WIN_H 800
+# define WIN_W 1500
+# define WIN_H 1000
 
 # define CLOSE 17
 # define ESC 53

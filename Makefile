@@ -6,7 +6,7 @@ PURPLE  =   \033[38;5;93m
 PINK    =   \033[38;5;219m
 NC      =   \033[0m
 
-NAME = minirt
+NAME = miniRT
 FLAGS = -Wall -Wextra -Werror -O3
 LIB = libft/libft.a
 MLX = minilibx/libmlx.a

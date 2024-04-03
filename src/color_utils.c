@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 17:20:00 by alcaball          #+#    #+#             */
-/*   Updated: 2024/04/03 17:24:36 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:29:17 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	average_color(t_vec color)
 	t_color	coli;
 
 	ratio = 1.0 / (double)SAMPLES;
-
 	dnew.x = color.x;
 	dnew.x *= ratio;
 	dnew.y = color.y;

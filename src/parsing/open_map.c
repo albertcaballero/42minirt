@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:29:44 by alcaball          #+#    #+#             */
-/*   Updated: 2024/04/03 17:30:36 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:32:38 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	open_map(char *fname, t_scene *scene)
 	return (0);
 }
 
+/* 
 void	print_objs(t_objs *objs)
 {
 	if (objs->type == SP)
@@ -125,4 +126,4 @@ void	print_objs(t_objs *objs)
 			objs->form.pb->rad, objs->form.pb->pos.x, objs->form.pb->pos.y, \
 			objs->form.pb->pos.z, objs->col.r, objs->col.g, objs->col.b);
 	}
-}
+} */

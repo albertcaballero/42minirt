@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 16:03:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/04/01 15:05:13 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:35:16 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	check_counters(t_parsing *counter)
 		error_msg("No camera", -1, NULL);
 	if (counter->camcount > 1)
 		error_msg("Too many cameras", -1, NULL);
-	if (counter->cycount + counter->plcount + counter->spcount + counter->pbcount > 50)
+	if (counter->cycount + counter->plcount + \
+		counter->spcount + counter->pbcount > 50)
 		error_msg("Too many objects in scene [max 50]", -1, NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:13:20 by alcaball          #+#    #+#             */
-/*   Updated: 2024/04/03 15:40:04 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:34:40 by jmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,14 @@ t_objs	*add_objects(t_objs *objs, char **args, int type)
 	if (objs == NULL)
 	{
 		objs = malloc(sizeof(t_objs));
+		objs->type = type;
 		init_type_obj(objs, args, type);
 		objs->next = NULL;
 		return (objs);
 	}
 	objs->next = malloc(sizeof(t_objs));
 	objs = objs->next;
+	objs->type = type;
 	init_type_obj(objs, args, type);
 	objs->next = NULL;
 	objs = tmp;
@@ -112,8 +114,6 @@ void	init_type(t_scene *scene, char **args, int type)
 	else
 		scene->objs = add_objects(scene->objs, args, type);
 }
-
-
 
 /* void	print_scene(t_scene *scene)
 {
