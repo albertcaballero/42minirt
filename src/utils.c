@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:21:47 by alcaball          #+#    #+#             */
-/*   Updated: 2024/03/28 17:19:47 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/04/04 11:39:26 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	ft_clamp(int val1, int lim, int type)
 	return (val1);
 }
 
-//mallocs a value and if return is NULL exits program
 void	*my_malloc(size_t size)
 {
 	void	*thing;

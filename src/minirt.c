@@ -6,37 +6,16 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:29 by alcaball          #+#    #+#             */
-/*   Updated: 2024/04/01 16:02:59 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/04/04 11:43:35 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-/* int	mlx_recalc_point(int button, int x, int y, t_scene *scene) //delete
-{
-	t_ray	ray;
-	t_point	px_center;
-	t_vec	ray_dir;
-	t_color	color;
-	t_vec	tmp[3];
-
-	if (button != 1)
-		return (1);
-	printf("=========pixel[%i, %i]==========\n", x, y);
-	tmp[0] = scalar_mult_vec_ret(&scene->cam.px_dlt_u, x);
-	tmp[1] = scalar_mult_vec_ret(&scene->cam.px_dlt_v, y);
-	tmp[2] = add_vec(&tmp[0], &tmp[1]);
-	px_center = add_vec(&scene->cam.px00_loc, &tmp[2]);
-	ray_dir = substract_vec(&px_center, &scene->cam.center);
-	ray = new_ray(&scene->cam.center, &ray_dir);
-	color = ray_color(&ray, scene);
-	printf("Color %i, %i, %i\n", color.r, color.g, color.b);
-	return (0);
-} */
-
 int	close_program(t_mlx *mlx)
 {
-	(void) mlx;
+	mlx_destroy_image(mlx->mlx, mlx->img.img);
+	mlx_destroy_window(mlx->mlx, mlx->win);
 	exit (0);
 	return (1);
 }
@@ -54,7 +33,7 @@ int	main(int argc, char **argv)
 	t_mlx	mlx;
 
 	if (argc != 2)
-		return (error_msg("invalid argc", -1, NULL));
+		return (error_msg("invalid argc [1]", -1, NULL));
 	scene.winsize = WIN_H * WIN_W;
 	scene.asp_ratio = (double)WIN_W / (double)WIN_H;
 	scene.objs = NULL;
@@ -71,4 +50,3 @@ int	main(int argc, char **argv)
 	mlx_hook(mlx.win, CLOSE, 0, close_program, (&mlx));
 	mlx_loop(mlx.mlx);
 }
-	/* mlx_mouse_hook(mlx.win, mlx_recalc_point, scene);*/
