@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmarinel <jmarinel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:32 by alcaball          #+#    #+#             */
-/*   Updated: 2024/04/03 17:55:54 by jmarinel         ###   ########.fr       */
+/*   Updated: 2024/04/04 11:36:26 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ typedef struct s_disk
 	double			rad;
 }	t_disk;
 
-
 /*=============== IDENTIFIERS  ==========*/
 typedef struct s_ambientLight
 {
@@ -176,8 +175,6 @@ typedef union u_forms
 	t_pl	*pl;
 	t_pb	*pb;
 }	t_forms;
-
-
 
 /*=============== HIT ==========*/
 typedef struct s_hit_calc
@@ -296,7 +293,6 @@ t_color	ray_color(t_ray *ray, t_scene *scene);
 
 /* find_lights.c */
 t_color	illuminate(t_scene *scene, t_point point, t_hit *rec);
-
 
 /* hit.c */
 t_hit	nearest_hit(t_ray *ray, t_scene *scene);

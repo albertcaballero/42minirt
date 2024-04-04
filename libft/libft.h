@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:12:37 by alcaball          #+#    #+#             */
-/*   Updated: 2024/01/15 12:58:45 by alcaball         ###   ########.fr       */
+/*   Updated: 2024/04/04 11:37:28 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <strings.h>
 # include <stdlib.h>
 # include <unistd.h>
-#include "gnl/get_next_line.h"
+# include "gnl/get_next_line.h"
 
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 int			ft_isalnum(int c);
@@ -76,6 +76,6 @@ void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 /* GNL */
-char	*get_next_line(int fd);
+char		*get_next_line(int fd);
 
 #endif
